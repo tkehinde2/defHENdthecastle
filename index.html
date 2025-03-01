@@ -4,41 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
+    <title>defHENd The Castle</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap">
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
   </head>
   <body>
-    <main>
-      <div id="intro">
-          <H1>defHENd The Castle</H1>
-          <input id="castleName" placeholder="Castle Name">
+    <!-- Overlay Background -->
+    <div id="overlay">
+      <main>
+        <!-- Intro Screen -->
+        <div id="intro">
+          <h1>defHENd The Castle</h1>
+          <input id="castleName" placeholder="Enter Castle Name">
           <button onclick="start()">Start Game</button>
-      </div>
-      <img id="castle" width="20px" height="20px" src="castle_4.png"/>
-        <div id="grass">
-            
-        </div> 
-        
-      <div id="checklist">
-          <h3>Objectives</h3>
-          <ul id="list">
-              <li><input type="checkbox"> Task 1</li>
-              <li><input type="checkbox"> Task 2</li>
-              <li><input type="checkbox"> Task 3</li>
-          </ul>
-      </div>
+        </div>
 
-      <div id="achievements">
-        <h3>Achievements</h3>
-        <ul id="list">
-            <li><input type="checkbox"> Task 1</li>
-            <li><input type="checkbox"> Task 2</li>
-            <li><input type="checkbox"> Task 3</li>
-        </ul>
+        <!-- Game Area -->
+        <div id="gameArea">
+          <img id="castle" src="castle_4.png" alt="Castle Image">
+          <div id="grass"></div>
+        </div>
+
+   <!-- Side Panels -->
+   <div id="leftPanel">
+    <div id="checklist">
+      <h3>Objectives</h3>
+      <ul>
+        <li>
+          <input type="checkbox">
+          <span>Secure the Gates</span>
+          <button class="startTask">Start Task</button>
+        </li>
+        <li>
+          <input type="checkbox">
+          <span>Defend Against Hackers</span>
+          <button class="startTask">Start Task</button>
+        </li>
+        <li>
+          <input type="checkbox">
+          <span>Protect the King's Data</span>
+          <button class="startTask">Start Task</button>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    </main>
+  <div id="rightPanel">
+    <div id="achievements">
+      <h3>Achievements</h3>
+      <ul>
+        <li>
+          <span class="achievement-icon">🏆</span>
+          <span class="achievement-text">First Line of Defense</span>
+        </li>
+        <li>
+          <span class="achievement-icon">🛡️</span>
+          <span class="achievement-text">Firewall Master</span>
+        </li>
+        <li>
+          <span class="achievement-icon">🔒</span>
+          <span class="achievement-text">Data Guardian</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
     <script src="scripts.js"></script>
   </body>
 </html>

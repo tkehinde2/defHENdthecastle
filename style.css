@@ -1,128 +1,301 @@
-#grass{
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'MedievalSharp', cursive; /* Use a medieval-style font */
+    background-color: #1e1e1e; /* Dark background for contrast */
+    color: #f4f4f4; /* Light text for readability */
+    overflow: hidden;
+  }
+  
+  main {
+    position: relative;
+    height: 100vh;
+  }
+  
+  /* Intro Screen */
+  #intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: #3a2c2c; /* Dark brown for medieval feel */
+    border: 2px solid #8b7355; /* Gold border */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  
+  #intro h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #d4af37; /* Gold text */
+  }
+  
+  #castleName {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    border: 1px solid #8b7355;
+    border-radius: 5px;
+    background-color: #2a1e1e;
+    color: #f4f4f4;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #8b7355; /* Gold button */
+    border: none;
+    border-radius: 5px;
+    color: #1e1e1e;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #d4af37; /* Lighter gold on hover */
+  }
+  
+  /* Game Area */
+  #gameArea {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #castle {
+    position: absolute;
+    top: -300px;
+    left: 50px;
+    width: 150px;
+    height: auto;
+    z-index: 5;
+  }
+  
+  #grass {
     position: absolute;
     top: -350px;
-    height: 300px;
     left: 0;
     width: 100vw;
-    background-color: green;
-}
-
-#intro {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: center; /* Center items vertically */
-    align-items: center; /* Center items horizontally */
-    position: absolute;
-    top: -150px; /* Starts off-screen */
-    left: 50%; /* Moves it to the center horizontally */
-    transform: translateX(-50%); /* Corrects the div’s position so it’s perfectly centered */
     height: 300px;
-    width: 25%; /* You can adjust this width as needed */
-    background-color: rgb(229, 175, 65);
-    border-radius: 2%;
-    border: 2px solid red;
-}
-
-#castle{
+    background-color: #2a4d2a; /* Dark green grass */
+    z-index: 1;
+  }
+  
+/* Side Panels */
+/* Left Panel (Objectives) */
+/* Left Panel (Objectives) */
+#leftPanel {
     position: absolute;
-    top: -300px; /* Start off-screen, above the viewport */
-    left: 50px;  /* Position the castle to the left */
-    width: 150px;  /* Adjust size of the castle */
-    height: auto;  /* Keep aspect ratio of the castle */
-}
-
-.grassDown {
-    animation: grassDown 2s ease-out forwards;
-}
-
-@keyframes grassDown {
-    0% {
-        top: -350px; /* Off-screen */
-    }
-    100% {
-        top: calc(100vh - 150px);
-}
-}
-
-@keyframes moveIntro {
-    0% {
-        top: -150px; /* Off-screen */
-    }
-    100% {
-        top: 25vh;
-}
-}
-
-.introUp {
-    animation: upIntro 1s ease-out forwards;
-}
-
-.introDown{
-    animation: moveIntro 2s ease-out forwards;
-}
-
-@keyframes upIntro {
-    0% {
-        top: 25vh; /* Off-screen */
-    }
-    100% {
-        top: -350px;
-}
-}
-
-.landCastle{
-    animation: landCastle 2s ease-out forwards;
-}
-
-@keyframes landCastle {
-    0% {
-        top: -300px; /* Start above the screen */
-    }
-    100% {
-        top: calc(100vh - 275px); /* Land directly on top of the grass */
-    }
-}
-
-@keyframes showMenus{
-    0% {
-        opacity: 0; /* Start above the screen */
-    }
-    100% {
-        opacity: 100; /* Land directly on top of the grass */
-    }
-}
-.showMenus{
-    animation: showMenus 2s ease-in forwards;
-}
-
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+  }
+  
+  /* Checklist Styling */
+ /* Checklist Styling */
 #checklist {
     opacity: 0;
-    width: 300px;
-    padding: 15px;
-    border: 2px solid #333;
+    width: 320px; /* Slightly wider for better spacing */
+    padding: 20px;
+    background-color: #2a1e1e; /* Dark brown background */
+    border: 3px solid #8b7355; /* Gold border */
     border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-#achievements {
-    opacity: 0;
-    position: fixed;  /* Keeps it fixed on the screen */
-    top: 10px;        /* Adjust as needed */
-    right: 10px;
-    width: 300px;
-    padding: 15px;
-    border: 2px solid #333;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
-
-
-ul {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Deeper shadow for depth */
+  }
+  
+  #checklist h3 {
+    color: #d4af37; /* Gold text */
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+  }
+  
+  #checklist ul {
     list-style: none;
     padding: 0;
-}
-
-li {
-    margin: 5px 0;
-}
+    margin: 0;
+  }
+  
+  #checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: rgba(58, 44, 44, 0.8); /* Semi-transparent dark brown */
+    border: 1px solid #8b7355; /* Gold border */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+  }
+  
+  #checklist li:hover {
+    transform: translateY(-2px); /* Lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+  }
+  
+  #checklist input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #d4af37; /* Gold checkbox */
+    cursor: pointer;
+  }
+  
+  #checklist span {
+    flex-grow: 1;
+    color: #f4f4f4; /* Light text */
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+  }
+  
+  /* Start Task Button */
+  .startTask {
+    padding: 5px 10px;
+    background-color: #8b7355; /* Gold background */
+    border: 1px solid #d4af37; /* Light gold border */
+    border-radius: 5px;
+    color: #1e1e1e; /* Dark text */
+    font-family: 'MedievalSharp', cursive;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .startTask:hover {
+    background-color: #d4af37; /* Lighter gold on hover */
+    transform: scale(1.05); /* Slight grow effect on hover */
+  }
+  /* Right Panel (Achievements) */
+/* Right Panel (Achievements) */
+#rightPanel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+  }
+  
+  /* Achievements Styling */
+  #achievements {
+    opacity: 0;
+    width: 250px;
+    padding: 15px;
+    background-color: #3a2c2c; /* Dark brown background */
+    border: 2px solid #8b7355; /* Gold border */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  #achievements h3 {
+    color: #d4af37; /* Gold text */
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+  }
+  
+  #achievements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #achievements li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: rgba(58, 44, 44, 0.8); /* Semi-transparent dark brown */
+    border: 1px solid #8b7355; /* Gold border */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+  }
+  
+  #achievements li:hover {
+    transform: translateY(-2px); /* Lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+  }
+  
+  .achievement-icon {
+    font-size: 1.5rem; /* Larger icon size */
+    color: #d4af37; /* Gold icon color */
+  }
+  
+  .achievement-text {
+    flex-grow: 1;
+    color: #f4f4f4; /* Light text */
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+  }
+  
+  /* Checklist and Achievements Styling */
+  #checklist, #achievements {
+    opacity: 0;
+    width: 250px;
+    padding: 15px;
+    background-color: #3a2c2c;
+    border: 2px solid #8b7355;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  #checklist h3, #achievements h3 {
+    color: #d4af37;
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    margin: 10px 0;
+    color: #f4f4f4;
+  }
+  
+  /* Animations */
+  .grassDown {
+    animation: grassDown 2s ease-out forwards;
+  }
+  
+  @keyframes grassDown {
+    0% { top: -350px; }
+    100% { top: calc(100vh - 150px); }
+  }
+  
+  .introUp {
+    animation: introUp 1s ease-out forwards;
+  }
+  
+  @keyframes introUp {
+    0% { top: 50%; }
+    100% { top: -350px; }
+  }
+  
+  .landCastle {
+    animation: landCastle 2s ease-out forwards;
+  }
+  
+  @keyframes landCastle {
+    0% { top: -300px; }
+    100% { top: calc(100vh - 275px); }
+  }
+  
+  .showMenus {
+    animation: showMenus 2s ease-in forwards;
+  }
+  
+  @keyframes showMenus {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
