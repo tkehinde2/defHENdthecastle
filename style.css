@@ -89,7 +89,6 @@ body {
   
 /* Side Panels */
 /* Left Panel (Objectives) */
-/* Left Panel (Objectives) */
 #leftPanel {
     position: absolute;
     top: 20px;
@@ -384,4 +383,34 @@ body {
   
   #passwordHints li.completed {
     color: #4caf50; /* Green for completed hints */
+  }
+
+  #timer {
+    color: #d4af37;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    text-align: center;
+  }
+  /* Castle Name Display */
+#castleNameDisplay {
+    position: fixed; /* Fixed positioning to keep it at the top */
+    top: 20px; /* Distance from the top of the page */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for exact centering */
+    color: #d4af37; /* Gold color */
+    font-size: 2rem; /* Larger font size */
+    font-family: 'MedievalSharp', cursive; /* Medieval font */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+    z-index: 1000; /* Ensure it's above other elements */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade-in effect */
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
+
+  /* Audio Controls (Optional) */
+  audio {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
   }

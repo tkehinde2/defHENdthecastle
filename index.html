@@ -10,6 +10,7 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
   </head>
   <body>
+
     <!-- Overlay Background -->
     <div id="overlay">
       <main>
@@ -25,6 +26,10 @@
           <img id="castle" src="castle_4.png" alt="Castle Image">
           <div id="grass"></div>
         </div>
+        <audio id="backgroundMusic" loop>
+          <source src="medieval-soundtrack.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
 <!-- Password Game Overlay -->
 <div id="passwordGameOverlay" class="overlay">
   <div class="overlay-content">
@@ -33,13 +38,17 @@
     <input type="text" id="passwordInput" placeholder="Type here...">
     <div id="passwordHints">
       <ul>
-        <li id="hintLength">🔒 Must be at least 8 characters long.</li>
+        <li id="hintLength">🔒 Must be at least 12 characters long.</li>
         <li id="hintNumber">🔢 Must contain a number.</li>
         <li id="hintSpecialChar">✨ Must contain a special character.</li>
         <li id="hintCastleWord">🏰 Must include a castle-related word (e.g., "defend").</li>
         <li id="hintEmoji">😀 Must include an emoji.</li>
+        <li id="hintUppercase">🔠 Must contain an uppercase letter.</li>
+        <li id="hintLowercase">🔡 Must contain a lowercase letter.</li>
+        <li id="hintNoSpaces">🚫 Must not contain spaces.</li>
       </ul>
     </div>
+    <div id="timer">Time Left: 60s</div>
     <button id="closeOverlay">Close</button>
   </div>
 </div>
