@@ -1,0 +1,128 @@
+#grass{
+    position: absolute;
+    top: -350px;
+    height: 300px;
+    left: 0;
+    width: 100vw;
+    background-color: green;
+}
+
+#intro {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    position: absolute;
+    top: -150px; /* Starts off-screen */
+    left: 50%; /* Moves it to the center horizontally */
+    transform: translateX(-50%); /* Corrects the div’s position so it’s perfectly centered */
+    height: 300px;
+    width: 25%; /* You can adjust this width as needed */
+    background-color: rgb(229, 175, 65);
+    border-radius: 2%;
+    border: 2px solid red;
+}
+
+#castle{
+    position: absolute;
+    top: -300px; /* Start off-screen, above the viewport */
+    left: 50px;  /* Position the castle to the left */
+    width: 150px;  /* Adjust size of the castle */
+    height: auto;  /* Keep aspect ratio of the castle */
+}
+
+.grassDown {
+    animation: grassDown 2s ease-out forwards;
+}
+
+@keyframes grassDown {
+    0% {
+        top: -350px; /* Off-screen */
+    }
+    100% {
+        top: calc(100vh - 150px);
+}
+}
+
+@keyframes moveIntro {
+    0% {
+        top: -150px; /* Off-screen */
+    }
+    100% {
+        top: 25vh;
+}
+}
+
+.introUp {
+    animation: upIntro 1s ease-out forwards;
+}
+
+.introDown{
+    animation: moveIntro 2s ease-out forwards;
+}
+
+@keyframes upIntro {
+    0% {
+        top: 25vh; /* Off-screen */
+    }
+    100% {
+        top: -350px;
+}
+}
+
+.landCastle{
+    animation: landCastle 2s ease-out forwards;
+}
+
+@keyframes landCastle {
+    0% {
+        top: -300px; /* Start above the screen */
+    }
+    100% {
+        top: calc(100vh - 275px); /* Land directly on top of the grass */
+    }
+}
+
+@keyframes showMenus{
+    0% {
+        opacity: 0; /* Start above the screen */
+    }
+    100% {
+        opacity: 100; /* Land directly on top of the grass */
+    }
+}
+.showMenus{
+    animation: showMenus 2s ease-in forwards;
+}
+
+#checklist {
+    opacity: 0;
+    width: 300px;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+#achievements {
+    opacity: 0;
+    position: fixed;  /* Keeps it fixed on the screen */
+    top: 10px;        /* Adjust as needed */
+    right: 10px;
+    width: 300px;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
