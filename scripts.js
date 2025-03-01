@@ -53,6 +53,10 @@ function showPasswordGame(checkbox) {
 // Hide the password game overlay
 function hidePasswordGame() {
   passwordGameOverlay.style.display = "none";
+  const element = document.getElementById("startPasswordGame");
+  if (element) {
+    element.remove();
+  }
 }
 
 // Reset hints to their initial state

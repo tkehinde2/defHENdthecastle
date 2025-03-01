@@ -172,6 +172,11 @@ body {
     background-color: #d4af37; /* Lighter gold on hover */
     transform: scale(1.05); /* Slight grow effect on hover */
   }
+
+  .startTask:hover:disabled {
+    background-color: #8b7355;
+    transform: scale(1.0);
+  }
   /* Right Panel (Achievements) */
 /* Right Panel (Achievements) */
 #rightPanel {
