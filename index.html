@@ -25,7 +25,24 @@
           <img id="castle" src="castle_4.png" alt="Castle Image">
           <div id="grass"></div>
         </div>
-
+<!-- Password Game Overlay -->
+<div id="passwordGameOverlay" class="overlay">
+  <div class="overlay-content">
+    <h2>Password Game</h2>
+    <p>Create a password that meets the following rules:</p>
+    <input type="text" id="passwordInput" placeholder="Type here...">
+    <div id="passwordHints">
+      <ul>
+        <li id="hintLength">🔒 Must be at least 8 characters long.</li>
+        <li id="hintNumber">🔢 Must contain a number.</li>
+        <li id="hintSpecialChar">✨ Must contain a special character.</li>
+        <li id="hintCastleWord">🏰 Must include a castle-related word (e.g., "defend").</li>
+        <li id="hintEmoji">😀 Must include an emoji.</li>
+      </ul>
+    </div>
+    <button id="closeOverlay">Close</button>
+  </div>
+</div>
    <!-- Side Panels -->
    <div id="leftPanel">
     <div id="checklist">
