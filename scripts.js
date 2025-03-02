@@ -550,9 +550,8 @@ function waveOneEnemy(){
             enemyOne.classList.add("enemyMove");
            
         }, 500);
-    }, 5000); //Before was 4500
+    }, 5000);
 
-    showWaveOneVictory();
 }
   
   function hideWaveOneOverlay(){
@@ -587,9 +586,11 @@ function waveOneEnemy(){
   function showWaveOneVictory(){
     const waveOneWinnerOverlay = document.getElementById("waveOneWinnerOverlay");
     waveOneWinnerOverlay.style.display = "flex";
+    waveOneWinnerOverlay.style.display = "flex";
   }
   function hideWaveOneWinnerOverlay(){
     const waveOneWinnerOverlay = document.getElementById("waveOneWinnerOverlay");
+    waveOneWinnerOverlay.remove();
     waveOneWinnerOverlay.remove();
   }
 // Flag to track if the achievement has been added
@@ -614,12 +615,13 @@ function checkEnemyCollision() {
   ) {
     handleEnemyCollision();
     console.log("Collestion with tower!");
+    showWaveOneVictory();
   }
 
 
   // Check collision with castle (defender)
   if (
-    enemyRect.left < castleRect.left &&
+    enemyRect.left < castleRect.right &&
     enemyRect.right > castleRect.left &&
     enemyRect.top < castleRect.bottom &&
     enemyRect.bottom > castleRect.top
