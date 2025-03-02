@@ -45,6 +45,8 @@
           <img id="tower" src="archer 2d.png" alt="Tower Image">
           <img id="enemyOne" class="waveOneEnemy" src="waveOneEnemy.png">
           <img id="enemyTwo" class="waveOneEnemy" src="enemytwo.png">
+          <img id="enemyThree" class="waveOneEnemy" src="archer 2d.png">
+          <img id="watch" src="tower.png">
           <img id="spikeball" src="spikes.png" >
           <div id="grass"></div>
            <!-- Inside the #gameArea div -->
@@ -103,7 +105,7 @@
 <div id="waveTwoOverlay" class="overlay">
   <div class="overlay-content">
     <h2>Congrats!</h2>
-    <p id="waveText">With your ability to detect phishing, a spikeball has been added to your defense!</p>
+    <p id="waveText">By adding TFA, a spikeball has been added to your defense!</p>
     <button id="closeOverlay" onclick="hideWaveTwoOverlay()">Close</button>
   </div>
 </div>
@@ -114,6 +116,22 @@
       <br>Achievment Unlocked : The First Line Of Defense🏆
     </p>
     <button id="closeOverlay" onclick="hideWaveTwoWinnerOverlay()">Close</button>
+  </div>
+</div>
+<div id="waveThreeOverlay" class="overlay">
+  <div class="overlay-content">
+    <h2>Congrats!</h2>
+    <p id="waveText">With your ability to detect phishing, a watchtower has been added to your defense!</p>
+    <button id="closeOverlay" onclick="hideWaveThreeOverlay()">Close</button>
+  </div>
+</div>
+<div id="waveThreeWinnerOverlay" class="overlay">
+  <div class="overlay-content">
+    <h2>Winner!</h2>
+    <p> Nice! The Fake Archer had no chance against a skilled cyber surfer like you!
+      <br>Achievment Unlocked : Defend Against Hackers
+    </p>
+    <button id="closeOverlay" onclick="hideWaveThreeWinnerOverlay()">Close</button>
   </div>
 </div>
 

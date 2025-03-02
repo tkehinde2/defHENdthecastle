@@ -605,6 +605,7 @@ function moveToNextEmail() {
       // Add a new task (example: "Build a Moat")
       addNewTask("Build a Moat", "startMoatGame");
 
+      launchWaveThree();
       // Revert the music to the original track
       revertToOriginalMusic();
     }
@@ -675,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function() {
   helpIcon.addEventListener('click', function() {
     helpTooltip.style.display = 'block';
   });
-  
+
   closeTooltipBtn.addEventListener('click', function() {
     helpTooltip.style.display = 'none';
   });
@@ -959,6 +960,23 @@ function revertToOriginalMusic() {
     backgroundMusic.load();
     backgroundMusic.play();
   }
+
+
+
+  function launchWaveThree() {
+    const waveThreeOverlay = document.getElementById("waveThreeOverlay");
+  
+  
+    setTimeout(() => {
+        waveThreeOverlay.style.display = "flex";
+      }, 3000);
+    
+    const tower = document.getElementById("watch");
+    tower.classList.add("landTowert");
+  
+    
+  
+    }
   // Add this function to handle Wave 2
 function launchWaveTwo() {
   const waveTwoOverlay = document.getElementById("waveTwoOverlay");
@@ -988,6 +1006,8 @@ function launchWaveTwo() {
 
     waveTwoEnemy();
 
+    revertToOriginalMusic();
+
     // Add an achievement for completing Wave 2
     addAchievement("Wave 2: Defended the Castle", "🛡️");
   
@@ -996,6 +1016,67 @@ function launchWaveTwo() {
     if (defendAgainstHackersTask) {
       defendAgainstHackersTask.style.display = "block";
     }
+  }
+
+  function hideWaveThreeOverlay() {
+    const waveThreeOverlay = document.getElementById("waveThreeOverlay");
+    waveThreeOverlay.style.display = "none";
+  
+    let music = document.getElementById("backgroundMusic")
+    let source = document.getElementById("musicSource");
+    source.src = "attack.mp3";
+    music.load();
+    music.play();
+    displayWaveName("Wave 3: Defend Against Hackers")
+
+    waveThreeEnemy();
+
+    // Add an achievement for completing Wave 2
+    addAchievement("Defend Against Hackers", "🥷🏾");
+  
+    // Show the "Defend Against Hackers" task
+    const defendAgainstHackersTask = document.querySelector("#checklist li:nth-child(2)");
+    if (defendAgainstHackersTask) {
+      defendAgainstHackersTask.style.display = "block";
+    }
+  }
+
+  function waveThreeEnemy(){
+    const enemyThree = document.getElementById("enemyThree");
+
+      enemyThree.classList.add("enemyThreeMove");  
+
+      setTimeout(() => {
+        // Shake the enemy when the player reaches it
+        enemyTwo.classList.add("enemyShake");
+    
+        setTimeout(() => {
+            // Make the enemy fall off the screen
+            enemyTwo.classList.add("enemyFall");
+    
+            // Add another delay before showing the victory screen
+            setTimeout(() => {
+                showWaveThreeVictory();
+            }, 500); // Adjust the delay as needed (e.g., 1000ms = 1 second)
+    
+        }, 500);
+    }, 5000);
+
+
+
+  }
+
+  function showWaveThreeVictory(){
+    const enemyThree = document.getElementById("enemyThree");
+    enemyThree.remove();
+    const waveThreeWinnerOverlay = document.getElementById("waveThreeWinnerOverlay");
+    waveThreeWinnerOverlay.style.display = "flex";
+  }
+  function hideWaveThreeWinnerOverlay(){
+
+    
+    const waveThreeWinnerOverlay = document.getElementById("waveThreeWinnerOverlay");
+    waveThreeWinnerOverlay.remove();
   }
   
   // Modify the checkTwoFactorCode function to trigger Wave 2

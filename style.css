@@ -94,6 +94,15 @@ body {
     height: auto;
     z-index: 5;
   }
+
+  #watch {
+    position: absolute;
+    top: -300px;
+    left: 475px;
+    width: 150px;
+    height: auto;
+    z-index: 5;
+  }
   
   #grass {
     position: absolute;
@@ -319,6 +328,9 @@ body {
   .landCastle {
     animation: landCastle 2s ease-out forwards;
   }
+  .landTowert{
+    animation: landTowert 2s ease-out forwards;
+  }
   
   @keyframes landCastle {
     0% { top: -300px; }
@@ -328,6 +340,11 @@ body {
   @keyframes landTower {
     0% { top: -300px; }
     100% { top: calc(100vh - 280px); }
+  }
+
+  @keyframes landTowert {
+    0% { top: -300px; }
+    100% { top: calc(100vh - 340px); }
   }
 
   .landTower {
@@ -807,6 +824,10 @@ body {
     animation: twoMove 5s linear forwards;
   }
 
+  .enemyThreeMove{
+    animation: threeMove 5s linear forwards;
+  }
+
   .enemyShake{
     animation: shake 2.5s linear;
   }
@@ -835,6 +856,11 @@ body {
 @keyframes twoMove {
   from { left: 100vw; }
   to { left: 375px; }
+}
+
+@keyframes threeMove {
+  from { left: 100vw; }
+  to { left: 475px; }
 }
   #castleHealthBar {
     position: absolute;
