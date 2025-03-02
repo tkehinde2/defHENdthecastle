@@ -85,7 +85,6 @@ const passwordHints = [
 
 let currentTaskCheckbox = null;
 let currentHintIndex = 0;
-let timeLimit = 60; // 60 seconds time limit
 let timerInterval = null;
 
 // Show the password game overlay
@@ -170,6 +169,7 @@ function updatePasswordHints() {
 
 // Start the timer
 function startTimer() {
+    let timeLimit = 60; // 60 seconds time limit
   const timerDisplay = document.getElementById("timer");
   timerDisplay.textContent = `Time Left: ${timeLimit}s`;
   timerInterval = setInterval(() => {
