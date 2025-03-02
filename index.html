@@ -215,6 +215,83 @@
   </div>
 </div>
 
+<!-- Cipher Game Overlay -->
+<div id="cipherGameOverlay" class="overlay">
+  <div class="overlay-content">
+    <h2>Encryption</h2>
+    <p id="cipherPositionShifts"> </p>
+    <table id="medieval-table">
+      <tr>
+        <th>Key</th>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>E</td>
+        <td>F</td>
+        <td>G</td>
+        <td>H</td>
+        <td>I</td>
+        <td>J</td>
+        <td>K</td>
+        <td>L</td>
+        <td>M</td>
+        <td>N</td>
+        <td>O</td>
+        <td>P</td>
+        <td>Q</td>
+        <td>R</td>
+        <td>S</td>
+        <td>T</td>
+        <td>U</td>
+        <td>V</td>
+        <td>W</td>
+        <td>X</td>
+        <td>Y</td>
+        <td>Z</td>
+      </tr>
+      <tr>
+        <th>Value</th>
+        <td><input type="text" id="inputA" maxlength="1" /></td>
+        <td><input type="text" id="inputB" maxlength="1" /></td>
+        <td><input type="text" id="inputC" maxlength="1" /></td>
+        <td><input type="text" id="inputD" maxlength="1" /></td>
+        <td><input type="text" id="inputE" maxlength="1" /></td>
+        <td><input type="text" id="inputF" maxlength="1" /></td>
+        <td><input type="text" id="inputG" maxlength="1" /></td>
+        <td><input type="text" id="inputH" maxlength="1" /></td>
+        <td><input type="text" id="inputI" maxlength="1" /></td>
+        <td><input type="text" id="inputJ" maxlength="1" /></td>
+        <td><input type="text" id="inputK" maxlength="1" /></td>
+        <td><input type="text" id="inputL" maxlength="1" /></td>
+        <td><input type="text" id="inputM" maxlength="1" /></td>
+        <td><input type="text" id="inputN" maxlength="1" /></td>
+        <td><input type="text" id="inputO" maxlength="1" /></td>
+        <td><input type="text" id="inputP" maxlength="1" /></td>
+        <td><input type="text" id="inputQ" maxlength="1" /></td>
+        <td><input type="text" id="inputR" maxlength="1" /></td>
+        <td><input type="text" id="inputS" maxlength="1" /></td>
+        <td><input type="text" id="inputT" maxlength="1" /></td>
+        <td><input type="text" id="inputU" maxlength="1" /></td>
+        <td><input type="text" id="inputV" maxlength="1" /></td>
+        <td><input type="text" id="inputW" maxlength="1" /></td>
+        <td><input type="text" id="inputX" maxlength="1" /></td>
+        <td><input type="text" id="inputY" maxlength="1" /></td>
+        <td><input type="text" id="inputZ" maxlength="1" /></td>
+      </tr>
+    </table>
+    
+    
+    
+    <p id="unencrypted-text">The time has come for our forces to march upon the enemy stronghold. We shall strike at dawn, for their defenses are weakest in the early hours. 
+    Lead our knights with valor, and let no man falter. The fate of the realm depends on your skill and courage—make us proud.</p>
+    <p id="unencrypted-help-text">Encrypt the first sentence of the message</p>
+    <input type="text" id="cipherInput" placeholder="Type here...">
+    <button id="closeOverlay">Close</button>
+    <button id="checkEncryptionBtn">Check Encryption</button>
+    <button id="checkCipherTableBtn">Check Cipher</button>
+  </div>
+</div>
 
    <!-- Side Panels -->
    <div id="leftPanel">
@@ -239,6 +316,11 @@
       <input type="checkbox" id="checkboxPhishingGame" disabled>
       <span>Defend Against Hackers</span>
       <button class="startTask" id="startPhishingGame" onclick="openPhishingTask()">Start Task</button>
+    </li>
+    <li>
+      <input type="checkbox" id="checkboxCipherGame" disabled>
+      <span>Defend Against Hackers</span>
+      <button class="startTask" id="startCipherGame">Start Task</button>
     </li>
   </ul>
 </div>

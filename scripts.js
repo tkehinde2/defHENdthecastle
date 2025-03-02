@@ -121,7 +121,7 @@ const passwordHints = [
 let currentTaskCheckbox = null;
 let currentHintIndex = 0;
 let timerInterval = null;
-const randomNumber = null;
+let randomNumber = null;
 
 // Ensure the twoFactor game overlay buttons are selected correctly
 const twoFactorOverlay = document.getElementById("twoFactorGameOverlay");
@@ -168,6 +168,132 @@ function checkTwoFactorCode() {
 // Attach event listeners
 closeTwoFactorBtn.addEventListener("click", () => hideTwoFactorGame(false));
 submitTwoFactorBtn.addEventListener("click", checkTwoFactorCode);
+
+const cipherGameOverlay = document.getElementById("cipherGameOverlay");
+const closeCipherBtn = cipherGameOverlay.querySelector("#closeOverlay");
+const checkEncryptionBtn = cipherGameOverlay.querySelector("#checkEncryptionBtn");
+const checkCipherTableBtn = document.getElementById("checkCipherTableBtn");
+const cipherBox = document.getElementById("cipherInput"); 
+const cipherTable = document.getElementById("medieval-table");
+const shiftPositionsText = cipherGameOverlay.querySelector("#cipherPositionShifts");
+const unencryptedText = document.getElementById("unencrypted-text");
+const unencryptedHelpText = document.getElementById("unencrypted-help-text");
+
+// Function to show the cipher game and generate a random shift
+function showCipherGame(checkbox) {
+    currentTaskCheckbox = checkbox;
+    cipherGameOverlay.style.display = "flex";
+    cipherTable.style.display = "flex";
+
+    cipherBox.style.display = "none";
+    checkEncryptionBtn.style.display = "none";
+    unencryptedText.style.display = "none";
+    unencryptedHelpText.style.display = "none";
+    
+    // Generate a random shift number between 1 and 5
+    randomNumber = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+    
+    // Update the cipher shift text in the overlay
+    shiftPositionsText.textContent = "Shift: " + randomNumber;
+}
+
+// Function to hide the cipher game overlay
+function hideCipherGame(isGameEnded) {
+    cipherGameOverlay.style.display = "none";
+
+    if (isGameEnded == true) {
+        const element = document.getElementById("startCipherGame");
+        if (element) {
+            element.remove();
+            const box = document.getElementById("checkboxCipherGame");
+            box.checked = true;
+        }
+    }
+}
+
+// Event listener for closing the overlay
+closeCipherBtn.addEventListener("click", () => hideCipherGame());
+
+// Function to verify if the user's input matches the ciphered values
+function verifyCipher(rand, unencryptedText = "", encryptedText = "") {
+    const shifts = rand; // Cipher shift
+    const keyRow = document.querySelectorAll('#medieval-table tr:first-child td');
+    const valueRow = document.querySelectorAll('#medieval-table tr:last-child input');
+  
+    let isCorrect = true;
+
+    // Loop through each column (except the first column)
+    for (let i = 1; i < keyRow.length; i++) {
+        const key = keyRow[i].textContent; // Get the key from the first row
+        const value = valueRow[i].value.trim().toUpperCase(); // Get the user input and normalize
+  
+        // Calculate the expected cipher value based on the shift
+        const expectedValue = String.fromCharCode(((key.charCodeAt(0) - 65 + shifts) % 26) + 65);
+  
+        if (value !== expectedValue) {
+            isCorrect = false;
+            break;
+        }
+    }
+
+    // If unencryptedText and encryptedText are provided, compare them
+    if (unencryptedText && encryptedText) {
+        const expectedEncryptedText = applyCipher(unencryptedText, shifts); // Encrypt the unencrypted text with the provided shift
+        console.log(expectedEncryptedText)
+
+        if (expectedEncryptedText !== encryptedText) {
+            isCorrect = false;
+            alert("The encrypted text does not match.");
+        } else {
+            hideCipherGame(true);
+        }
+    }
+
+    if (isCorrect) {
+        transitionToEncryption();
+    } else {
+        alert("Incorrect. Try again.");
+    }
+}
+
+// Function to apply the cipher shift to a text (simple Caesar cipher logic)
+function applyCipher(text, shifts) {
+    let result = '';
+    for (let i = 0; i < text.length; i++) {
+        let char = text[i];
+        if (char.match(/[a-zA-Z]/)) {
+            const charCode = char.charCodeAt(0);
+            const base = (charCode >= 65 && charCode <= 90) ? 65 : 97; // Uppercase or lowercase base
+            const newCharCode = ((charCode - base + shifts) % 26) + base;
+            result += String.fromCharCode(newCharCode);
+        } else {
+            result += char; // Non-alphabetical characters remain the same
+        }
+    }
+    return result;
+}
+
+function transitionToEncryption() {
+    alert("Correct")
+    cipherTable.style.display = "none"
+    checkCipherTableBtn.style.display = "none";
+
+    unencryptedHelpText.style.display = "flex"
+    unencryptedText.style.display = "flex";
+    cipherBox.style.display = "flex";
+    checkEncryptionBtn.style.display = "flex";
+
+}
+
+let baseString = "The time has come for our forces to march upon the enemy stronghold."
+
+document.getElementById('checkCipherTableBtn').addEventListener('click', function() {
+    verifyCipher(randomNumber); // Call the verifyCipher function with the random number
+});
+
+checkEncryptionBtn.addEventListener('click', function() {
+    verifyCipher(randomNumber, baseString, cipherBox.value);
+});
 
 
 // Show the password game overlay
@@ -288,6 +414,15 @@ document.querySelectorAll("#startTwoFactorGame").forEach((button) => {
       showTwoFactorGame(checkbox);
     });
   });
+
+  document.querySelectorAll("#startCipherGame").forEach((button) => {
+    button.addEventListener("click", () => {
+      const checkbox = button.closest("li").querySelector("input[type='checkbox']");
+      showCipherGame(checkbox);
+    });
+  });
+
+
 
 
 // Phishing game state
@@ -884,4 +1019,5 @@ function launchWaveTwo() {
   
     // Append the new task to the end of the checklist
     checklist.appendChild(newTask);
-  }
+  }  
+

@@ -881,8 +881,140 @@ body {
     transition: opacity 0.5s ease-in-out; /* Smooth fade-in effect */
     white-space: nowrap; /* Prevent text from wrapping */
   }
-  
-/* Achievement Pop-Up Styles */
+
+  /* Table Styling */
+#medieval-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'MedievalSharp', cursive;
+    background-color: #2a1e1e;
+    color: #d4af37;
+    text-align: center;
+}
+
+#medieval-table th, #medieval-table td {
+    border: 2px solid #8b7355;
+    padding: 10px;
+}
+
+#medieval-table th {
+    background-color: #5e3a1e;
+}
+
+#medieval-table tr:nth-child(even) {
+    background-color: rgba(139, 115, 85, 0.5);
+}
+
+/* Styling for input boxes */
+#medieval-table input[type="text"] {
+    width: 100%; /* Make input fill the entire cell */
+    height: 100%; /* Ensure input fills vertically as well */
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent; /* Make background transparent */
+    color: #d4af37; /* Same as the text color */
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1em;
+    text-align: center;
+    outline: none;
+}
+
+#medieval-table input[type="text"]:focus {
+    background-color: transparent; /* Keep transparent when focused */
+    box-shadow: none; /* No extra focus border */
+}
+
+/* Update the overlay to take up most of the page */
+#cipherGameOverlay .overlay {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 40px; /* Add padding for spacing */
+}
+
+/* Update the content inside the overlay to fit large table */
+#cipherGameOverlay .overlay-content {
+    background-color: #3a2c2c;
+    padding: 30px;
+    border: 2px solid #8b7355;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%; /* Take up most of the screen width */
+    max-width: 1200px; /* Add a max-width to prevent it from growing too large */
+    max-height: 90%; /* Prevent overflow from the height of the screen */
+    overflow-y: auto; /* Allow scrolling if content exceeds available height */
+}
+
+/* Make the table responsive and fit within the overlay */
+#cipherGameOverlay #medieval-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Ensure columns are evenly distributed */
+}
+
+#cipherGameOverlay #medieval-table th,
+#cipherGameOverlay #medieval-table td {
+    padding: 8px;
+    border: 1px solid #8b7355;
+    text-align: center;
+    word-wrap: break-word; /* Allow words to wrap within cells */
+}
+
+/* Adjust input field and buttons */
+#cipherGameOverlay input {
+    padding: 10px;
+    margin-top: 20px;
+    width: 50%;
+    border: 1px solid #8b7355;
+    border-radius: 5px;
+    background-color: #2a1e1e;
+    color: #f4f4f4;
+}
+
+#cipherGameOverlay button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #8b7355;
+    border: none;
+    border-radius: 5px;
+    color: #1e1e1e;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#cipherGameOverlay button:hover {
+    background-color: #d4af37;
+}
+
+#cipherGameOverlay #closeOverlay {
+    background-color: #8b7355;
+    margin-top: 10px;
+}
+
+#cipherGameOverlay #closeOverlay:hover {
+    background-color: #d4af37;
+}
+
+#cipherInput {
+    justify-self: center;
+}
+
+#unencrypted-help-text {
+    justify-self: center;
+}
+
+#checkEncryptionBtn {
+    justify-self: center;
+}/* Achievement Pop-Up Styles */
 .achievement-popup {
     position: fixed;
     bottom: 20px;
