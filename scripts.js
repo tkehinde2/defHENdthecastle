@@ -455,6 +455,24 @@ function moveToNextEmail() {
       // Display completion overlay
       document.getElementById('correctCount').textContent = phishingGameState.correctCount;
       document.getElementById('completionOverlay').style.display = 'flex';
+
+      // Add the "Phishing achievement" achievement
+      addAchievement("Phishing achievement", "🪝");
+
+      // Show the achievement pop-up
+      showAchievementPopup("Phishing achievement");
+
+      // Remove the "Protect the King's Data" task from objectives
+      const phishingTask = document.querySelector("#checklist li:nth-child(1)");
+      if (phishingTask) {
+        phishingTask.remove();
+      }
+
+      // Add a new task (example: "Build a Moat")
+      addNewTask("Build a Moat", "startMoatGame");
+
+      // Revert the music to the original track
+      revertToOriginalMusic();
     }
   } else {
     // Display the next email
