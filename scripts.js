@@ -510,6 +510,9 @@ function checkEnemyCollision() {
   }
 }
 
+// Store the original music source
+const originalMusicSource = "medieval-soundtrack.mp3";
+
 // Function to handle enemy collision
 function handleEnemyCollision() {
   // Ensure the achievement is only added once
@@ -542,6 +545,9 @@ function handleEnemyCollision() {
 
   // Add a new task (example: "Build a Moat")
   addNewTask("Build a Moat", "startMoatGame");
+
+  // Revert the music to the original track
+  revertToOriginalMusic();
 }
 
 // Function to add an achievement
@@ -556,17 +562,25 @@ function addAchievement(text, icon) {
 }
 
 // Function to add a new task
-function addNewTask(text, taskId) {
-  const checklist = document.querySelector("#checklist ul");
-  const newTask = document.createElement("li");
-  newTask.innerHTML = `
-    <input type="checkbox" id="checkbox${taskId}" disabled>
-    <span>${text}</span>
-    <button class="startTask" id="${taskId}">Start Task</button>
-  `;
-  checklist.appendChild(newTask);
-}
-
+// Function to add a new task with difficulty
+function addNewTask(text, taskId, difficulty = "easy") {
+    const checklist = document.querySelector("#checklist ul");
+    const newTask = document.createElement("li");
+  
+    // Add the difficulty class
+    if (difficulty === "medium") {
+      newTask.classList.add("medium");
+    } else if (difficulty === "hard") {
+      newTask.classList.add("hard");
+    }
+  
+    newTask.innerHTML = `
+      <input type="checkbox" id="checkbox${taskId}" disabled>
+      <span>${text}</span>
+      <button class="startTask" id="${taskId}">Start Task</button>
+    `;
+    checklist.appendChild(newTask);
+  }
 // Function to show the achievement pop-up
 function showAchievementPopup(achievementName) {
   const popup = document.createElement("div");
@@ -592,3 +606,13 @@ function showAchievementPopup(achievementName) {
 
 // Call the collision check function periodically
 setInterval(checkEnemyCollision, 100);
+
+
+// Function to revert the music to the original track
+function revertToOriginalMusic() {
+    const backgroundMusic = document.getElementById("backgroundMusic");
+    const musicSource = document.getElementById("musicSource");
+    musicSource.src = originalMusicSource;
+    backgroundMusic.load();
+    backgroundMusic.play();
+  }
