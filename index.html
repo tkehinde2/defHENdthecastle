@@ -89,6 +89,7 @@
     <button id="closeOverlay" onclick="hideWaveOneOverlay()">Close</button>
   </div>
 </div>
+
 <!-- Add this phishing task overlay modal to your HTML file just before the closing </main> tag -->
 <div id="phishingOverlay" class="overlay">
   <div class="overlay-content phishing-content">
@@ -96,30 +97,33 @@
     <div class="medieval-corner top-right"></div>
     <div class="medieval-corner bottom-left"></div>
     <div class="medieval-corner bottom-right"></div>
+
+    <!-- Help Buttion -->
+    <div class="help-icon" id="phishingHelpIcon">?</div>
+    <div id="phishingHelpTooltip" class="help-tooltip">
+      <h3>How to Identify Phishing</h3>
+      <ul>
+        <li>Check for poor grammar and spelling errors</li>
+        <li>Examine the sender's email address carefully</li>
+        <li>Be wary of urgent requests or threats</li>
+        <li>Hover over links before clicking (don't actually click!)</li>
+        <li>Be suspicious of requests for passwords or personal information</li>
+      </ul>
+      <button class="close-tooltip-btn">Close</button>
+    </div>
     
     <h2>Royal Message Inspection</h2>
     
     <div class="email-container">
       <div class="email-header">
-        <div class="email-field"><span>From:</span> Royal Treasury &lt;treasury@kingdom-finances.gov&gt;</div>
-        <div class="email-field"><span>To:</span> Loyal Subject &lt;you@kingdom.gov&gt;</div>
-        <div class="email-field"><span>Subject:</span> URGENT: Action Required - Your Royal Stipend</div>
+        <!-- Added email to be flexable -->
+        <div class="email-field"><span>From:</span> <span id="emailFrom"></span></div>
+        <div class="email-field"><span>To:</span> <span id="emailTo"></span></div>
+        <div class="email-field"><span>Subject:</span> <span id="emailSubject"></span></div>
       </div>
       
-      <div class="email-body">
-        <p>Dear Loyal Subject,</p>
-        
-        <p>The Royal Treasury has attempted to deposit your monthly stipend, but there was an issue with your account information. To avoid any delays in receiving your gold coins, please update your information immediately.</p>
-        
-        <p>Click <a href="#">here</a> to verify your identity and update your treasury account details. You will need to provide your full name, residence location, and the secret password to your kingdom account.</p>
-        
-        <p>This matter requires your immediate attention. Failure to respond within 1 day will result in forfeiture of your monthly stipend.</p>
-        
-        <p>With respect,<br>
-        Lord Goldkeeper<br>
-        Royal Treasury Department</p>
-        
-        <p><small>Note: The kingdom never asks for your secret password unless requested through official channels.</small></p>
+      <div class="email-body" id="emailBody">
+        <!-- Email content will be inserted here via JavaScript -->
       </div>
     </div>
     
@@ -127,6 +131,46 @@
       <button class="safe-btn" onclick="makeDecision('safe')">Safe Message</button>
       <button class="phishing-btn" onclick="makeDecision('phishing')">Phishing Attempt</button>
     </div>
+    <!-- Added Progess Tracker -->
+    <div id="progressTracker">
+      Email <span id="currentEmailNumber">1</span> of 3
+    </div>
+  </div>
+</div>
+
+<!-- Added Error Feedback Overlay -->
+<div id="errorFeedbackOverlay" class="overlay">
+  <div class="overlay-content feedback-content">
+    <div class="medieval-corner top-left"></div>
+    <div class="medieval-corner top-right"></div>
+    <div class="medieval-corner bottom-left"></div>
+    <div class="medieval-corner bottom-right"></div>
+    
+    <h2>Phishing Detected!</h2>
+    <div id="errorFeedbackContent">
+      <!-- Error feedback content will be inserted here via JavaScript -->
+    </div>
+    <div class="phishing-indicators" id="phishingIndicators">
+      <!-- Indicators will be inserted here via JavaScript -->
+    </div>
+    <button class="close-feedback-btn" onclick="closeErrorFeedback()">Continue</button>
+  </div>
+</div>
+
+<!-- Success Completion Overlay -->
+<div id="completionOverlay" class="overlay">
+  <div class="overlay-content completion-content">
+    <div class="medieval-corner top-left"></div>
+    <div class="medieval-corner top-right"></div>
+    <div class="medieval-corner bottom-left"></div>
+    <div class="medieval-corner bottom-right"></div>
+    
+    <h2>Task Completed!</h2>
+    <p>Congratulations, brave defender! You have successfully completed your training in identifying royal message deceptions.</p>
+    <div id="completionStats">
+      <p>You correctly identified <span id="correctCount">0</span> out of 3 messages.</p>
+    </div>
+    <button class="close-completion-btn" onclick="closeCompletionOverlay()">Return to Kingdom</button>
   </div>
 </div>
 
@@ -142,6 +186,7 @@
     <button id="sumbitTwoFactor">Submit</button>
   </div>
 </div>
+
 
    <!-- Side Panels -->
    <div id="leftPanel">

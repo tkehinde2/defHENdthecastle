@@ -503,7 +503,7 @@ body {
   margin-bottom: 10px;
 }
 
-.safe-btn, .phishing-btn {
+.safe-btn, .phishing-btn, .close-feedback-btn, .close-completion-btn {
   padding: 10px 25px;
   font-size: 18px;
   border-radius: 5px;
@@ -525,8 +525,41 @@ body {
   border: 2px solid #da190b;
 }
 
-.safe-btn:hover, .phishing-btn:hover {
+.safe-btn:hover, .phishing-btn:hover, .close-feedback-btn:hover, .close-completion-btn:hover {
   transform: scale(1.05);
+}
+
+.help-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 25px;
+  height: 25px;
+  background-color: #8b4513;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 5;
+}
+
+.help-tooltip {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  background-color: #1e1e1e;
+  /* #fff; */
+  border: 2px solid #8b4513;
+  border-radius: 5px;
+  padding: 15px;
+  width: 300px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  text-align: left;
 }
 
 /* Medieval decorative corners */
@@ -535,6 +568,8 @@ body {
   width: 20px;
   height: 20px;
   background-color: #8b7355;
+  /* Might Delete */
+  z-index: 1;
 }
 
 .top-left {

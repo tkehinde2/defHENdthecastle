@@ -290,53 +290,196 @@ document.querySelectorAll("#startTwoFactorGame").forEach((button) => {
   });
 
 
-  // Phishing Task
-
-  // Phishing Task Functions
+// Phishing game state
+const phishingGameState = {
+  currentEmailIndex: 0,
+  correctCount: 0,
+  emails: [
+    {
+      from: "Royal Treasury &lt;treasury@kingdom-finances.gov&gt;",
+      to: "Loyal Subject &lt;you@kingdom.gov&gt;",
+      subject: "URGENT: Action Required - Your Royal Stipend",
+      body: `
+        <p>Dear Loyal Subject,</p>
+        <p>The Royal Treasury has attempted to deposit your monthly stipend, but there was an issue with your account information. To avoid any delays in receiving your gold coins, please update your information immediately.</p>
+        <p>Click <a href="#">here</a> to verify your identity and update your treasury account details. You will need to provide your full name, residence location, and the secret password to your kingdom account.</p>
+        <p>This matter requires your immediate attention. Failure to respond within 1 day will result in forfeiture of your monthly stipend.</p>
+        <p>With respect,<br>
+         Lord Goldkeeper<br>
+         Royal Treasury Department</p>
+        <p><small>Note: The kingdom never asks for your secret password unless requested through official channels.</small></p>
+      `,
+      isPhishing: true,
+      phishingIndicators: [
+        "Requests your secret password, which legitimate messages would never do",
+        "Creates urgency with a threat of losing funds",
+        "Contains contradictory information (note at bottom contradicts main message)",
+        "Uses a suspicious domain (kingdom-finances.gov instead of kingdom.gov)"
+      ],
+      explanation: "This message is a phishing attempt! It asks for your secret password, creates false urgency, and uses a suspicious domain name that doesn't match official kingdom communications."
+    },
+    {
+      from: "Royal Guard Captain &lt;captain@royal-guard.kingdom.gov&gt;",
+      to: "Loyal Subject &lt;you@kingdom.gov&gt;",
+      subject: "Monthly Security Patrol Schedule",
+      body: `
+        <p>Greetings, Kingdom Defender,</p>
+        <p>Attached is the monthly schedule for security patrols around the castle perimeter. Please review your assigned shifts and report any conflicts to your squadron leader.</p>
+        <p>The schedule can be viewed securely through the Royal Guard Portal. <a href="#">Access the portal here</a> using your standard kingdom credentials.</p>
+        <p>Remember to arrive at the armory 15 minutes before your shift for proper equipment inspection.</p>
+        <p>Serving with honor,<br>
+         Captain Shieldbearer<br>
+         Royal Guard Command</p>
+      `,
+      isPhishing: false,
+      explanation: "This is a legitimate message. It does not ask for sensitive information, directs you to the official portal, and contains expected information about guard duties."
+    },
+    {
+      from: "Castle IT Support &lt;support@kngdom.gov&gt;",
+      to: "Kingdom Employee &lt;you@kingdom.gov&gt;",
+      subject: "CRITICAL: Your Kingdom Account Will Be Locked",
+      body: `
+        <p>Dear Valued Staff Member,</p>
+        <p>Due to recent security breaches, we are implementing new security measures. Your account has been flagged for immediate password reset.</p>
+        <p>You must <a href="#">click here urgently</a> to reset your password within the next 2 hours or your account will be automatically locked.</p>
+        <p>When resetting, please provide your:</p>
+        <ul>
+          <li>Current password</li>
+          <li>Mother's maiden name</li>
+          <li>First pet's name</li>
+        </ul>
+        <p>Regards,<br>
+         IT Security Team</p>
+      `,
+      isPhishing: true,
+      phishingIndicators: [
+        "There's a spelling error in the sender's email (kngdom.gov instead of kingdom.gov)",
+        "Creates false urgency with a threat",
+        "Asks for security question answers along with your current password",
+        "Does not address you by your specific name or title"
+      ],
+      explanation: "This is a phishing attempt! The sender's email contains a misspelling (kngdom.gov), it creates urgency with threats, and asks for sensitive information including your current password and security question answers."
+    }
+  ]
+};
 
 // Function to open the phishing task modal
 function openPhishingTask() {
+  // Reset to first email if task was previously completed
+  if (phishingGameState.currentEmailIndex >= phishingGameState.emails.length) {
+    phishingGameState.currentEmailIndex = 0;
+    phishingGameState.correctCount = 0;
+  }
+  
+  // Display the current email
+  displayCurrentEmail();
+  
+  // Show the overlay
   document.getElementById('phishingOverlay').style.display = 'flex';
+}
+
+// Function to display the current email
+function displayCurrentEmail() {
+  const currentEmail = phishingGameState.emails[phishingGameState.currentEmailIndex];
+  
+  // Update email content
+  document.getElementById('emailFrom').innerHTML = currentEmail.from;
+  document.getElementById('emailTo').innerHTML = currentEmail.to;
+  document.getElementById('emailSubject').innerHTML = currentEmail.subject;
+  document.getElementById('emailBody').innerHTML = currentEmail.body;
+  
+  // Update progress tracker
+  document.getElementById('currentEmailNumber').textContent = phishingGameState.currentEmailIndex + 1;
 }
 
 // Function to handle user decision on phishing email
 function makeDecision(decision) {
-  if (decision === 'phishing') {
-    // Correct answer
-    showSuccess("Well done! You've identified a phishing attempt. The message asked for your secret password, which legitimate kingdom messages would never do.");
-    
-    // Mark the checkbox as completed
-    const checkbox = document.querySelector('#checklist li:nth-child(2) input[type="checkbox"]');
-    checkbox.checked = true;
-
-    // Start Task Button will be removed
-    const element = document.getElementById("startPhishingGame");
-    element.remove();
-    
-    
-  } else {
-    // Incorrect answer
-    showError("That was a phishing attempt! Always be suspicious of messages asking for your secret password!");
-    // You could add code here for consequences of incorrect answer
-  }
+  const currentEmail = phishingGameState.emails[phishingGameState.currentEmailIndex];
+  const isCorrect = (decision === 'phishing' && currentEmail.isPhishing) || 
+                    (decision === 'safe' && !currentEmail.isPhishing);
   
-  // Close the phishing overlay
-  document.getElementById('phishingOverlay').style.display = 'none';
+  if (isCorrect) {
+    // Correct answer
+    phishingGameState.correctCount++;
+    showSuccess("Well done! You correctly identified this message.");
+    moveToNextEmail();
+  } else {
+    // Incorrect answer - show detailed feedback
+    if (currentEmail.isPhishing) {
+      // User thought a phishing email was safe
+      
+      // Display phishing indicators
+      let indicatorsHTML = '<h3>Phishing Indicators:</h3><ul>';
+      currentEmail.phishingIndicators.forEach(indicator => {
+        indicatorsHTML += `<li>${indicator}</li>`;
+      });
+      indicatorsHTML += '</ul>';
+      document.getElementById('phishingIndicators').innerHTML = indicatorsHTML;
+      
+      // Show error feedback overlay
+      document.getElementById('phishingOverlay').style.display = 'none';
+      document.getElementById('errorFeedbackOverlay').style.display = 'flex';
+    } else {
+      // User thought a safe email was phishing
+      showError("This was actually a safe message. Not all official communications are suspicious!");
+      moveToNextEmail();
+    }
+  }
 }
 
-// Helper functions for feedback (assuming these don't exist yet)
+// Function to close error feedback and move to next email
+function closeErrorFeedback() {
+  document.getElementById('errorFeedbackOverlay').style.display = 'none';
+  moveToNextEmail();
+}
+
+// Function to move to the next email
+function moveToNextEmail() {
+  phishingGameState.currentEmailIndex++;
+  
+  // Check if we've gone through all emails
+  if (phishingGameState.currentEmailIndex >= phishingGameState.emails.length) {
+    // All emails processed, show completion overlay
+    console.log("The Phishing Game has ended!!");
+    document.getElementById('phishingOverlay').style.display = 'none';
+    
+    // Mark the task as completed if at least 2 correct
+    if (phishingGameState.correctCount >= 2) {
+      const checkbox = document.querySelector('#checklist li:nth-child(2) input[type="checkbox"]');
+      if (checkbox) checkbox.checked = true;
+      
+      // Remove the start button if it exists
+      const element = document.getElementById("startPhishingGame");
+      if (element) element.remove();
+
+      // Display completion overlay
+      document.getElementById('correctCount').textContent = phishingGameState.correctCount;
+      document.getElementById('completionOverlay').style.display = 'flex';
+    }
+  } else {
+    // Display the next email
+    displayCurrentEmail();
+    document.getElementById('phishingOverlay').style.display = 'flex';
+  }
+}
+
+// Function to close completion overlay
+function closeCompletionOverlay() {
+  document.getElementById('completionOverlay').style.display = 'none';
+}
+
+// Helper functions for notifications
 function showSuccess(message) {
   // Create a success notification
   const notification = document.createElement('div');
   notification.className = 'notification success';
   notification.innerHTML = `
     <div class="notification-content">
-      <span>✓</span>
-      <p>${message}</p>
+    <span>✓</span>
+    <p>${message}</p>
     </div>
   `;
   document.body.appendChild(notification);
-  
   // Remove after 3 seconds
   setTimeout(() => {
     notification.remove();
@@ -349,69 +492,34 @@ function showError(message) {
   notification.className = 'notification error';
   notification.innerHTML = `
     <div class="notification-content">
-      <span>✗</span>
-      <p>${message}</p>
+    <span>✗</span>
+    <p>${message}</p>
     </div>
   `;
   document.body.appendChild(notification);
-  
   // Remove after 3 seconds
   setTimeout(() => {
     notification.remove();
   }, 3000);
 }
 
-// Add these notification styles to your CSS
-const style = document.createElement('style');
-style.textContent = `
-  .notification {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    z-index: 1000;
-    animation: slideIn 0.5s forwards;
-  }
+// Set up event listeners when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Set up help icon functionality
+  const helpIcon = document.getElementById('phishingHelpIcon');
+  const helpTooltip = document.getElementById('phishingHelpTooltip');
+  const closeTooltipBtn = document.querySelector('.close-tooltip-btn');
   
-  .notification-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  helpIcon.addEventListener('click', function() {
+    helpTooltip.style.display = 'block';
+  });
   
-  .notification.success {
-    background-color: #2a4d2a;
-    border: 2px solid #4CAF50;
-  }
-  
-  .notification.error {
-    background-color: #4d2a2a;
-    border: 2px solid #f44336;
-  }
-  
-  .notification span {
-    font-size: 1.5rem;
-  }
-  
-  .notification p {
-    margin: 0;
-    color: #f4f4f4;
-  }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-`;
-document.head.appendChild(style);
+  closeTooltipBtn.addEventListener('click', function() {
+    helpTooltip.style.display = 'none';
+  });
+});
 
+// Wave 1
   function launchWaveOne(){
     const waveOneOverlay = document.getElementById("waveOneOverlay");
 
@@ -442,7 +550,7 @@ function waveOneEnemy(){
             enemyOne.classList.add("enemyMove");
            
         }, 500);
-    }, 4500);
+    }, 5000); //Before was 4500
 
     showWaveOneVictory();
 }
@@ -474,17 +582,15 @@ function waveOneEnemy(){
     setTimeout(() => {
         waveNameDisplay.style.opacity = "0";
       }, 3500); // Small delay to ensure the element is added to the DOM
-    
-
   }
 
   function showWaveOneVictory(){
     const waveOneWinnerOverlay = document.getElementById("waveOneWinnerOverlay");
-    waveOneOverlay.style.display = "flex";
+    waveOneWinnerOverlay.style.display = "flex";
   }
   function hideWaveOneWinnerOverlay(){
     const waveOneWinnerOverlay = document.getElementById("waveOneWinnerOverlay");
-    waveOneOverlay.remove();
+    waveOneWinnerOverlay.remove();
   }
 // Flag to track if the achievement has been added
 let isAchievementAdded = false;
@@ -507,11 +613,13 @@ function checkEnemyCollision() {
     enemyRect.bottom > towerRect.top
   ) {
     handleEnemyCollision();
+    console.log("Collestion with tower!");
   }
+
 
   // Check collision with castle (defender)
   if (
-    enemyRect.left < castleRect.right &&
+    enemyRect.left < castleRect.left &&
     enemyRect.right > castleRect.left &&
     enemyRect.top < castleRect.bottom &&
     enemyRect.bottom > castleRect.top
@@ -519,7 +627,6 @@ function checkEnemyCollision() {
     handleEnemyCollision();
   }
 }
-
 // Store the original music source
 const originalMusicSource = "medieval-soundtrack.mp3";
 
