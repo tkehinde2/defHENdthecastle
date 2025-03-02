@@ -86,6 +86,54 @@ const passwordHints = [
 let currentTaskCheckbox = null;
 let currentHintIndex = 0;
 let timerInterval = null;
+const randomNumber = null;
+
+// Ensure the twoFactor game overlay buttons are selected correctly
+const twoFactorOverlay = document.getElementById("twoFactorGameOverlay");
+const closeTwoFactorBtn = twoFactorOverlay.querySelector("#closeOverlay");
+const submitTwoFactorBtn = document.getElementById("sumbitTwoFactor")
+const twoFactorInput = document.getElementById("twoFactorInput");
+let correctTwoFactorCode = null; // Store the correct code
+
+function showTwoFactorGame(checkbox) {
+    currentTaskCheckbox = checkbox;
+    twoFactorOverlay.style.display = "flex";
+    twoFactorInput.value = "";
+    generateQRCode();
+}
+
+function hideTwoFactorGame(isCodeCorrect) {
+    twoFactorOverlay.style.display = "none";
+    if (isCodeCorrect) {
+        const element = document.getElementById("startTwoFactorGame");
+        if (element) {
+            element.remove();
+            const box = document.getElementById("checkboxTwoFactorGame");
+            box.checked = true;
+        }
+    }
+}
+
+// Generate QR code and verification number
+function generateQRCode() {
+    correctTwoFactorCode = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
+    const qrData = encodeURIComponent(correctTwoFactorCode.toString());
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${qrData}&format=png&bgcolor=255-255-255-0`;
+    document.getElementById("qrcode").src = qrUrl;
+}
+
+// Verify Two-Factor Code
+function checkTwoFactorCode() {
+    const enteredCode = twoFactorInput.value.trim();
+    if (enteredCode === correctTwoFactorCode.toString()) {
+        hideTwoFactorGame(true);
+    }
+}
+
+// Attach event listeners
+closeTwoFactorBtn.addEventListener("click", () => hideTwoFactorGame(false));
+submitTwoFactorBtn.addEventListener("click", checkTwoFactorCode);
+
 
 // Show the password game overlay
 function showPasswordGame(checkbox) {
@@ -185,6 +233,7 @@ function startTimer() {
 }
 
 // Event listener for the close button
+closeOverlay.addEventListener("click", hideTwoFactorGame);
 closeOverlay.addEventListener("click", hidePasswordGame);
 
 // Add event listeners to "Start Task" buttons
@@ -194,6 +243,13 @@ document.querySelectorAll("#startPasswordGame").forEach((button) => {
     showPasswordGame(checkbox);
   });
 });
+
+document.querySelectorAll("#startTwoFactorGame").forEach((button) => {
+    button.addEventListener("click", () => {
+      const checkbox = button.closest("li").querySelector("input[type='checkbox']");
+      showTwoFactorGame(checkbox);
+    });
+  });
 
 
   // Phishing Task

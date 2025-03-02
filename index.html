@@ -120,6 +120,20 @@
     </div>
   </div>
 </div>
+
+<!-- Two Factor Game Overlay -->
+<div id="twoFactorGameOverlay" class="overlay">
+  <div class="overlay-content">
+    <h2>Two Factor Authentication</h2>
+    <p>Scan the QR Code and enter the search verification number that appears:</p>
+    <img id="qrcode" alt="QR Code" width="200" height="200">
+    <button onclick="generateQRCode()">Generate QR Code</button>
+    <input type="text" id="twoFactorInput" placeholder="Type here...">
+    <button id="closeOverlay">Close</button>
+    <button id="sumbitTwoFactor">Submit</button>
+  </div>
+</div>
+
    <!-- Side Panels -->
    <div id="leftPanel">
     <div id="checklist">
@@ -136,9 +150,9 @@
           <button class="startTask" id="startPhishingGame" onclick="openPhishingTask()">Start Task</button>
         </li>
         <li>
-          <input type="checkbox">
+          <input type="checkbox" id="checkboxTwoFactorGame" disabled>
           <span>Protect the King's Data</span>
-          <button class="startTask">Start Task</button>
+          <button class="startTask" id="startTwoFactorGame">Start Task</button>
         </li>
       </ul>
     </div>
