@@ -426,16 +426,53 @@ document.head.appendChild(style);
 
 function waveOneEnemy(){
     const enemyOne = document.getElementById("enemyOne");
+    const enemyTwo = document.getElementById("enemyTwo");
+    const enemyThree = document.getElementById("enemyThree");
+
+      enemyOne.classList.add("enemyMove");  
 
     setTimeout(() => {
-        enemyOne.classList.add("waveOne");
-      }, 3000);
+        // Shake the enemy when the player reaches it
+
+        enemyOne.classList.add("enemyShake");
+        
+
+        setTimeout(() => {
+            // Make the enemy fall off the screen
+            enemyOne.classList.add("enemyMove");
+           
+        }, 500);
+    }, 4500);
 }
   
-
   function hideWaveOneOverlay(){
     waveOneOverlay.remove();
+    let music = document.getElementById("backgroundMusic")
+    let source = document.getElementById("musicSource");
+    source.src = "attack.mp3";
+    music.load();
+    music.play();
+    displayWaveName("Wave 1: Secure The Gates")
 
     waveOneEnemy();
+  }
+
+  function displayWaveName(name) {
+    // Create a new div for the castle name
+    const waveNameDisplay = document.createElement("div");
+    waveNameDisplay.id = "waveNameDisplay";
+    waveNameDisplay.textContent = name;
+  
+    // Append the castle name display to the body (or a specific container)
+    document.body.appendChild(waveNameDisplay);
+  
+    // Fade in the castle name
+    
+    waveNameDisplay.style.opacity = "1";
+    setTimeout(() => {
+        waveNameDisplay.style.opacity = "0";
+      }, 3500); // Small delay to ensure the element is added to the DOM
+    
+
   }
 

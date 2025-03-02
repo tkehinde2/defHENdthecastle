@@ -425,6 +425,7 @@ body {
     white-space: nowrap; /* Prevent text from wrapping */
   }
 
+
   /* Audio Controls (Optional) */
   audio {
     position: fixed;
@@ -735,27 +736,40 @@ body {
   .waveOneEnemy{
     position: absolute;
     left: 100vw;
-    top: 450px;
-    height: 250px;
-    width: 250px;
+    top: 465px;
+    height: 200px;
+    width: 150px;
     z-index: 6;
   }
 
-  .waveOne{
-    animation: waveOne 2s ease-in forwards;
+  .enemyMove{
+    animation: move 5s linear forwards;
   }
 
-  @keyframes waveOne {
-
-    0%{
-        left: 100vw;
-    }
-
-    100%{
-        left: 200px;
-    }
-    
+  .enemyShake{
+    animation: shake 2.5s linear;
   }
+
+  .enemyFall{
+    animation: fall 3s ease-in-out forwards;
+  }
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(5px); }
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(200px); opacity: 0; }
+}
+
+@keyframes move {
+    from { left: 100vw; }
+    to { left: 200px; }
+}
   #castleHealthBar {
     position: absolute;
     bottom: 20px; /* Adjust this value to position it above the grass */
@@ -785,5 +799,20 @@ body {
     transform: translate(-50%, -50%);
     color: #fff;
     font-weight: bold;
+  }
+
+  #waveNameDisplay {
+    position: fixed; /* Fixed positioning to keep it at the top */
+    top: 60px; /* Distance from the top of the page */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for exact centering */
+    color: #d4af37; /* Gold color */
+    font-size: 2rem; /* Larger font size */
+    font-family: 'MedievalSharp', cursive; /* Medieval font */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+    z-index: 1000; /* Ensure it's above other elements */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade-in effect */
+    white-space: nowrap; /* Prevent text from wrapping */
   }
   
