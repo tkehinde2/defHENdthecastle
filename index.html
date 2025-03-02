@@ -72,6 +72,46 @@
     <button id="closeOverlay" onclick="launchWaveOne()">Close</button>
   </div>
 </div>
+<!-- Add this phishing task overlay modal to your HTML file just before the closing </main> tag -->
+<div id="phishingOverlay" class="overlay">
+  <div class="overlay-content phishing-content">
+    <div class="medieval-corner top-left"></div>
+    <div class="medieval-corner top-right"></div>
+    <div class="medieval-corner bottom-left"></div>
+    <div class="medieval-corner bottom-right"></div>
+    
+    <h2>Royal Message Inspection</h2>
+    
+    <div class="email-container">
+      <div class="email-header">
+        <div class="email-field"><span>From:</span> Royal Treasury &lt;treasury@kingdom-finances.gov&gt;</div>
+        <div class="email-field"><span>To:</span> Loyal Subject &lt;you@kingdom.gov&gt;</div>
+        <div class="email-field"><span>Subject:</span> URGENT: Action Required - Your Royal Stipend</div>
+      </div>
+      
+      <div class="email-body">
+        <p>Dear Loyal Subject,</p>
+        
+        <p>The Royal Treasury has attempted to deposit your monthly stipend, but there was an issue with your account information. To avoid any delays in receiving your gold coins, please update your information immediately.</p>
+        
+        <p>Click <a href="#">here</a> to verify your identity and update your treasury account details. You will need to provide your full name, residence location, and the secret password to your kingdom account.</p>
+        
+        <p>This matter requires your immediate attention. Failure to respond within 1 day will result in forfeiture of your monthly stipend.</p>
+        
+        <p>With respect,<br>
+        Lord Goldkeeper<br>
+        Royal Treasury Department</p>
+        
+        <p><small>Note: The kingdom never asks for your secret password unless requested through official channels.</small></p>
+      </div>
+    </div>
+    
+    <div class="decision-buttons">
+      <button class="safe-btn" onclick="makeDecision('safe')">Safe Message</button>
+      <button class="phishing-btn" onclick="makeDecision('phishing')">Phishing Attempt</button>
+    </div>
+  </div>
+</div>
    <!-- Side Panels -->
    <div id="leftPanel">
     <div id="checklist">
@@ -83,9 +123,9 @@
           <button class="startTask" id="startPasswordGame">Start Task</button>
         </li>
         <li>
-          <input type="checkbox">
+          <input type="checkbox" id="checkboxPhishingGame" disabled>
           <span>Defend Against Hackers</span>
-          <button class="startTask">Start Task</button>
+          <button class="startTask" id="startPhishingGame" onclick="openPhishingTask()">Start Task</button>
         </li>
         <li>
           <input type="checkbox">

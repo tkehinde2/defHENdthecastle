@@ -194,6 +194,134 @@ document.querySelectorAll("#startPasswordGame").forEach((button) => {
   });
 });
 
+
+  // Phishing Task
+
+  // Phishing Task Functions
+
+// Function to open the phishing task modal
+function openPhishingTask() {
+  document.getElementById('phishingOverlay').style.display = 'flex';
+}
+
+// Function to handle user decision on phishing email
+function makeDecision(decision) {
+  if (decision === 'phishing') {
+    // Correct answer
+    showSuccess("Well done! You've identified a phishing attempt. The message asked for your secret password, which legitimate kingdom messages would never do.");
+    
+    // Mark the checkbox as completed
+    const checkbox = document.querySelector('#checklist li:nth-child(2) input[type="checkbox"]');
+    checkbox.checked = true;
+
+    // Start Task Button will be removed
+    const element = document.getElementById("startPhishingGame");
+    element.remove();
+    
+    // You could also add code here to update achievements or game progress
+    // For example, show a notification or update an achievement
+    // const achievementsList = document.querySelector('#achievements ul');
+    // const achievementItem = achievementsList.querySelector('li:nth-child(2)');
+    // achievementItem.style.color = '#4caf50'; // Change color to indicate completion
+    
+  } else {
+    // Incorrect answer
+    showError("That was a phishing attempt! Always be suspicious of messages asking for your secret password!");
+    // You could add code here for consequences of incorrect answer
+  }
+  
+  // Close the phishing overlay
+  document.getElementById('phishingOverlay').style.display = 'none';
+}
+
+// Helper functions for feedback (assuming these don't exist yet)
+function showSuccess(message) {
+  // Create a success notification
+  const notification = document.createElement('div');
+  notification.className = 'notification success';
+  notification.innerHTML = `
+    <div class="notification-content">
+      <span>✓</span>
+      <p>${message}</p>
+    </div>
+  `;
+  document.body.appendChild(notification);
+  
+  // Remove after 3 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+}
+
+function showError(message) {
+  // Create an error notification
+  const notification = document.createElement('div');
+  notification.className = 'notification error';
+  notification.innerHTML = `
+    <div class="notification-content">
+      <span>✗</span>
+      <p>${message}</p>
+    </div>
+  `;
+  document.body.appendChild(notification);
+  
+  // Remove after 3 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+}
+
+// Add these notification styles to your CSS
+const style = document.createElement('style');
+style.textContent = `
+  .notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    animation: slideIn 0.5s forwards;
+  }
+  
+  .notification-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .notification.success {
+    background-color: #2a4d2a;
+    border: 2px solid #4CAF50;
+  }
+  
+  .notification.error {
+    background-color: #4d2a2a;
+    border: 2px solid #f44336;
+  }
+  
+  .notification span {
+    font-size: 1.5rem;
+  }
+  
+  .notification p {
+    margin: 0;
+    color: #f4f4f4;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+`;
+document.head.appendChild(style);
+
   function launchWaveOne(){
     const tower = document.getElementById("tower");
     tower.classList.add("landTower");
