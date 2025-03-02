@@ -894,3 +894,7 @@ body {
   .achievement-popup .achievement-text {
     font-size: 1rem;
   }
+  /* Hide the "Defend Against Hackers" task initially */
+#checklist li:nth-child(2) {
+    display: none;
+  }

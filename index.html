@@ -90,6 +90,7 @@
   </div>
 </div>
 
+
 <!-- Add this phishing task overlay modal to your HTML file just before the closing </main> tag -->
 <div id="phishingOverlay" class="overlay">
   <div class="overlay-content phishing-content">
@@ -190,26 +191,30 @@
 
    <!-- Side Panels -->
    <div id="leftPanel">
-    <div id="checklist">
-      <h3>Objectives</h3>
-      <ul>
-        <li>
-          <input type="checkbox" id="checkboxPasswordGame" disabled>
-          <span>Secure the Gates</span>
-          <button class="startTask" id="startPasswordGame">Start Task</button>
-        </li>
-        <li>
-          <input type="checkbox" id="checkboxPhishingGame" disabled>
-          <span>Defend Against Hackers</span>
-          <button class="startTask" id="startPhishingGame" onclick="openPhishingTask()">Start Task</button>
-        </li>
-        <li>
-          <input type="checkbox" id="checkboxTwoFactorGame" disabled>
-          <span>Protect the King's Data</span>
-          <button class="startTask" id="startTwoFactorGame">Start Task</button>
-        </li>
-      </ul>
-    </div>
+    <!-- Inside the #checklist div -->
+<div id="checklist">
+  <h3>Objectives</h3>
+  <ul>
+    <!-- Secure the Gates -->
+    <li>
+      <input type="checkbox" id="checkboxPasswordGame" disabled>
+      <span>Secure the Gates</span>
+      <button class="startTask" id="startPasswordGame">Start Task</button>
+    </li>
+    <!-- Protect the King's Data -->
+    <li>
+      <input type="checkbox" id="checkboxTwoFactorGame" disabled>
+      <span>Protect the King's Data</span>
+      <button class="startTask" id="startTwoFactorGame">Start Task</button>
+    </li>
+    <!-- Defend Against Hackers -->
+    <li>
+      <input type="checkbox" id="checkboxPhishingGame" disabled>
+      <span>Defend Against Hackers</span>
+      <button class="startTask" id="startPhishingGame" onclick="openPhishingTask()">Start Task</button>
+    </li>
+  </ul>
+</div>
   </div>
 
   <div id="rightPanel">

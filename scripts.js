@@ -630,42 +630,43 @@ function checkEnemyCollision() {
 // Store the original music source
 const originalMusicSource = "medieval-soundtrack.mp3";
 
-// Function to handle enemy collision
 function handleEnemyCollision() {
-  // Ensure the achievement is only added once
-  if (isAchievementAdded) return;
-  isAchievementAdded = true;
-
-  // Remove the password game
-  const passwordGameButton = document.getElementById("startPasswordGame");
-  if (passwordGameButton) {
-    passwordGameButton.remove();
+    // Ensure the achievement is only added once
+    if (isAchievementAdded) return;
+    isAchievementAdded = true;
+  
+    // Remove the "Secure the Gates" task
+    const secureGatesTask = document.querySelector("#checklist li:nth-child(1)");
+    if (secureGatesTask) {
+      secureGatesTask.remove();
+    }
+  
+    // Mark the "Secure the Gates" task as completed
+    const secureGatesCheckbox = document.getElementById("checkboxPasswordGame");
+    if (secureGatesCheckbox) {
+      secureGatesCheckbox.checked = true;
+    }
+  
+    // Add the "First Line of Defense" achievement
+    addAchievement("First Line of Defense", "🏆");
+  
+    // Show the achievement pop-up
+    showAchievementPopup("First Line of Defense");
+  
+    // Revert the music to the original track
+    revertToOriginalMusic();
+  
+    // Ensure the "Protect the King's Data" and "Defend Against Hackers" tasks remain visible
+    const protectKingsDataTask = document.querySelector("#checklist li:nth-child(1)");
+    const defendAgainstHackersTask = document.querySelector("#checklist li:nth-child(2)");
+  
+    if (protectKingsDataTask) {
+      protectKingsDataTask.style.display = "block"; // Ensure it's visible
+    }
+    if (defendAgainstHackersTask) {
+      defendAgainstHackersTask.style.display = "block"; // Ensure it's visible
+    }
   }
-
-  // Mark the "Secure the Gates" task as completed
-  const secureGatesCheckbox = document.getElementById("checkboxPasswordGame");
-  if (secureGatesCheckbox) {
-    secureGatesCheckbox.checked = true;
-  }
-
-  // Add the "First Line of Defense" achievement
-  addAchievement("First Line of Defense", "🏆");
-
-  // Show the achievement pop-up
-  showAchievementPopup("First Line of Defense");
-
-  // Remove the "Secure the Gates" task from objectives
-  const secureGatesTask = document.querySelector("#checklist li:nth-child(1)");
-  if (secureGatesTask) {
-    secureGatesTask.remove();
-  }
-
-  // Add a new task (example: "Build a Moat")
-  addNewTask("Build a Moat", "startMoatGame");
-
-  // Revert the music to the original track
-  revertToOriginalMusic();
-}
 
 // Function to add an achievement
 function addAchievement(text, icon) {
@@ -732,4 +733,60 @@ function revertToOriginalMusic() {
     musicSource.src = originalMusicSource;
     backgroundMusic.load();
     backgroundMusic.play();
+  }
+  // Add this function to handle Wave 2
+function launchWaveTwo() {
+    const waveTwoOverlay = document.getElementById("waveTwoOverlay");
+  
+    setTimeout(() => {
+      waveTwoOverlay.style.display = "flex";
+    }, 3000);
+  
+    // Add any animations or logic for Wave 2 here
+  }
+  
+  function hideWaveTwoOverlay() {
+    const waveTwoOverlay = document.getElementById("waveTwoOverlay");
+    waveTwoOverlay.remove();
+  
+    // Add an achievement for completing Wave 2
+    addAchievement("Wave 2: Defended the Castle", "🛡️");
+  
+    // Show the "Defend Against Hackers" task
+    const defendAgainstHackersTask = document.querySelector("#checklist li:nth-child(2)");
+    if (defendAgainstHackersTask) {
+      defendAgainstHackersTask.style.display = "block";
+    }
+  }
+  
+  // Modify the checkTwoFactorCode function to trigger Wave 2
+  function checkTwoFactorCode() {
+    const enteredCode = twoFactorInput.value.trim();
+    if (enteredCode === correctTwoFactorCode.toString()) {
+      hideTwoFactorGame(true);
+      launchWaveTwo(); // Launch Wave 2 after completing the Two-Factor task
+    }
+  }
+  function addNewTask(text, taskId, difficulty = "easy") {
+    const checklist = document.querySelector("#checklist ul");
+  
+    // Create the new task
+    const newTask = document.createElement("li");
+  
+    // Add the difficulty class
+    if (difficulty === "medium") {
+      newTask.classList.add("medium");
+    } else if (difficulty === "hard") {
+      newTask.classList.add("hard");
+    }
+  
+    // Add the task content
+    newTask.innerHTML = `
+      <input type="checkbox" id="checkbox${taskId}" disabled>
+      <span>${text}</span>
+      <button class="startTask" id="${taskId}">Start Task</button>
+    `;
+  
+    // Append the new task to the end of the checklist
+    checklist.appendChild(newTask);
   }
