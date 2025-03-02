@@ -1048,3 +1048,141 @@ body {
 #checklist li:nth-child(2) {
     display: none;
   }
+
+
+/* Data Breach Game Styles */
+.breach-story {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Make the overlay content wider and add scrolling if needed */
+#dataBreachOverlay .overlay-content {
+  width: 90%;
+  max-width: 1100px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.suspect-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: row; */
+  /* justify-content: space-between;  */
+  justify-content: center; 
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.suspect {
+  flex: 0 1 30%; /* Prevents uneven stretching, keeps each at ~30% width */
+  /* flex: 1; */
+  background-color: rgba(255, 248, 220, 0.9);
+  border: 2px solid #8B4513;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  min-width: 0; /* Allow cards to shrink if needed */
+}
+
+.suspect:hover {
+  transform: translateY(-5px);
+}
+
+.suspect-image {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.suspect h3 {
+  text-align: center;
+  color: #8B4513;
+  margin-top: 0;
+  font-family: 'MedievalSharp', cursive;
+}
+
+.suspect-role {
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 15px;
+  color: #5D4037;
+}
+/* Style Paragraphs */
+.suspect-story, .suspect-behavior {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #5D4037;
+}
+
+/* Create section dividers */
+.suspect-behavior {
+  position: relative;
+  padding-top: 15px;
+}
+
+.suspect-behavior:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 1px;
+  background-color: #8B4513;
+  opacity: 0.5;
+}
+
+.accuseButton {
+  display: block;
+  width: 80%;
+  margin: 15px auto 0;
+  padding: 8px 0;
+  background-color: #8B4513;
+  color: #FFF8DC;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'MedievalSharp', cursive;
+  transition: background-color 0.3s;
+}
+
+.accuseButton:hover {
+  background-color: #A0522D;
+}
+
+#accusationResult {
+  text-align: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#accusationTitle {
+  color: #8B4513;
+  margin-bottom: 15px;
+  font-family: 'MedievalSharp', cursive;
+  font-size: 24px;
+}
+
+/* Make the overlay content wider to accommodate the side-by-side layout */
+#dataBreachOverlay .overlay-content {
+  width: 85%;
+  max-width: 1000px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  /* Switch to vertical layout on smaller screens */
+  .suspect-profiles {
+    flex-direction: column;
+  }
+  
+  .suspect {
+    margin-bottom: 15px;
+  }
+}

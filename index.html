@@ -215,6 +215,110 @@
   </div>
 </div>
 
+<!-- Data Breach Overlay -->
+<div id="dataBreachOverlay" class="overlay">
+  <div class="overlay-content">
+   <div class="medieval-corner top-left"></div>
+   <div class="medieval-corner top-right"></div>
+   <div class="medieval-corner bottom-left"></div>
+   <div class="medieval-corner bottom-right"></div>
+   
+   <h2>Intruder Alert!</h2>
+   <div id="dataBreachStory" class="breach-story">
+     <p>My lord! Our magical notification system has detected an unauthorized person who has infiltrated the castle walls. This spy may have accessed sensitive kingdom information.</p>
+     <p>Your task is to identify the intruder among these three individuals working in the castle. Look for inconsistencies in their stories and behaviors to unmask the spy!</p>
+     <button id="beginInvestigation" class="medieval-button">Begin Investigation</button>
+   </div>
+   
+   <div id="suspectProfiles" class="suspect-profiles" style="display: none;">
+     <div class="suspect" id="suspect1">
+       <div class="suspect-image">🧙‍♂️</div>
+       <h3>Court Wizard Aldric</h3>
+       <p class="suspect-role">Role: Royal Wizard</p>
+       <p class="suspect-story">I've been brewing potions in the north tower all day. The King requested a special elixir for his upcoming journey. I haven't left my chambers except to gather herbs from the royal garden at midday.</p>
+       <p class="suspect-behavior">Recently seen: Taking extra scrolls from the royal library, claiming they're needed for research.</p>
+       <button class="accuseButton" data-suspect="1">Accuse</button>
+     </div>
+     
+     <div class="suspect" id="suspect2">
+       <div class="suspect-image">👨‍🍳</div>
+       <h3>Chef Bartolomew</h3>
+       <p class="suspect-role">Role: Royal Cook</p>
+       <p class="suspect-story">I was preparing the royal feast since dawn. The kitchen staff can verify my presence. I did step out briefly to speak with a merchant about exotic spices from the eastern kingdoms.</p>
+       <p class="suspect-behavior">Recently seen: Writing notes after conversations with royal guests about their favorite dishes.</p>
+       <button class="accuseButton" data-suspect="2">Accuse</button>
+     </div>
+     
+     <div class="suspect" id="suspect3">
+       <div class="suspect-image">👸</div>
+       <h3>Lady Eleanora</h3>
+       <p class="suspect-role">Role: Noblewoman</p>
+       <p class="suspect-story">I spent the morning in prayer, then attended court proceedings as is my duty. I had lunch with the duchess in the east wing before returning to my quarters to practice lute.</p>
+       <p class="suspect-behavior">Recently seen: Wandering near the war room during council meetings, claiming to be lost.</p>
+       <button class="accuseButton" data-suspect="3">Accuse</button>
+     </div>
+   </div>
+   
+   <div id="accusationResult" style="display: none;">
+     <h3 id="accusationTitle">Investigation Result</h3>
+     <p id="accusationText"></p>
+     <button id="closeDataBreach" class="medieval-button">Close</button>
+   </div>
+ </div>
+</div>
+
+<!-- Data Breach Overlay -->
+<div id="dataBreachOverlay" class="overlay">
+  <div class="overlay-content">
+   <div class="medieval-corner top-left"></div>
+   <div class="medieval-corner top-right"></div>
+   <div class="medieval-corner bottom-left"></div>
+   <div class="medieval-corner bottom-right"></div>
+   
+   <h2>Intruder Alert!</h2>
+   <div id="dataBreachStory" class="breach-story">
+     <p>My lord! Our magical notification system has detected an unauthorized person who has infiltrated the castle walls. This spy may have accessed sensitive kingdom information.</p>
+     <p>Your task is to identify the intruder among these three individuals working in the castle. Look for inconsistencies in their stories and behaviors to unmask the spy!</p>
+     <button id="beginInvestigation" class="medieval-button">Begin Investigation</button>
+   </div>
+   
+   <div id="suspectProfiles" class="suspect-profiles" style="display: none;">
+     <div class="suspect" id="suspect1">
+       <div class="suspect-image">🧙‍♂️</div>
+       <h3>Court Wizard Aldric</h3>
+       <p class="suspect-role">Role: Royal Wizard</p>
+       <p class="suspect-story">I've been brewing potions in the north tower all day. The King requested a special elixir for his upcoming journey. I haven't left my chambers except to gather herbs from the royal garden at midday.</p>
+       <p class="suspect-behavior">Recently seen: Taking extra scrolls from the royal library, claiming they're needed for research.</p>
+       <button class="accuseButton" data-suspect="1">Accuse</button>
+     </div>
+     
+     <div class="suspect" id="suspect2">
+       <div class="suspect-image">👨‍🍳</div>
+       <h3>Chef Bartolomew</h3>
+       <p class="suspect-role">Role: Royal Cook</p>
+       <p class="suspect-story">I was preparing the royal feast since dawn. The kitchen staff can verify my presence. I did step out briefly to speak with a merchant about exotic spices from the eastern kingdoms.</p>
+       <p class="suspect-behavior">Recently seen: Writing notes after conversations with royal guests about their favorite dishes.</p>
+       <button class="accuseButton" data-suspect="2">Accuse</button>
+     </div>
+     
+     <div class="suspect" id="suspect3">
+       <div class="suspect-image">👸</div>
+       <h3>Lady Eleanora</h3>
+       <p class="suspect-role">Role: Noblewoman</p>
+       <p class="suspect-story">I spent the morning in prayer, then attended court proceedings as is my duty. I had lunch with the duchess in the east wing before returning to my quarters to practice lute.</p>
+       <p class="suspect-behavior">Recently seen: Wandering near the war room during council meetings, claiming to be lost.</p>
+       <button class="accuseButton" data-suspect="3">Accuse</button>
+     </div>
+   </div>
+   
+   <div id="accusationResult" style="display: none;">
+     <h3 id="accusationTitle">Investigation Result</h3>
+     <p id="accusationText"></p>
+     <button id="closeDataBreach" class="medieval-button">Close</button>
+   </div>
+ </div>
+</div>
+
 <!-- Cipher Game Overlay -->
 <div id="cipherGameOverlay" class="overlay">
   <div class="overlay-content">

@@ -619,6 +619,15 @@ function moveToNextEmail() {
 // Function to close completion overlay
 function closeCompletionOverlay() {
   document.getElementById('completionOverlay').style.display = 'none';
+  // *** HardCoded The Random Data Breach to show up
+  showDataBreachTask();
+
+  // Add to the end of the closeCompletionOverlay function for Random Data Breach
+  // const originalCloseCompletionOverlay = closeCompletionOverlay;
+  // closeCompletionOverlay = function(){
+  // originalCloseCompletionOverlay();
+  // checkMediumTasksCompletion();
+// };
 }
 
 // Helper functions for notifications
@@ -1019,5 +1028,104 @@ function launchWaveTwo() {
   
     // Append the new task to the end of the checklist
     checklist.appendChild(newTask);
-  }  
+  }
 
+
+  // Data Bretch code:
+  const correctSuspect = 3; // Lady Eleanora is the spy (suspect 3)
+  
+  // Function to show the data breach task
+function showDataBreachTask() {
+  const dataBreachOverlay = document.getElementById("dataBreachOverlay");
+  dataBreachOverlay.style.display = "flex";
+  
+  // Play dramatic music for the breach scenario
+  // const backgroundMusic = document.getElementById("backgroundMusic");
+  // const musicSource = document.getElementById("musicSource");
+  
+  // Store the current music to return to it later
+  // const currentMusic = musicSource.src;
+  // musicSource.src = "breach-alert.mp3"; // You'll need to create/find this audio file
+  // backgroundMusic.load();
+  // backgroundMusic.play();
+  
+  // Set up event listeners for the data breach game
+  document.getElementById("beginInvestigation").addEventListener("click", beginInvestigation);
+  document.querySelectorAll(".accuseButton").forEach(button => {
+    button.addEventListener("click", function() {
+      const suspectId = parseInt(this.getAttribute("data-suspect"));
+      console.log("Suspect ID: ", suspectId)
+      accuseSuspect(suspectId);
+    });
+  });
+  
+  document.getElementById("closeDataBreach").addEventListener("click", function() {
+    closeDataBreachTask();
+    
+    // Restore previous music
+    // musicSource.src = currentMusic;
+    // backgroundMusic.load();
+    // backgroundMusic.play();
+  });
+}
+
+// Function to begin the investigation
+function beginInvestigation() {
+  document.getElementById("dataBreachStory").style.display = "none";
+  document.getElementById("suspectProfiles").style.display = "block";
+}
+
+// Function to handle suspect accusation 
+function accuseSuspect(suspectId) {
+  const accusationResult = document.getElementById("accusationResult");
+  const accusationTitle = document.getElementById("accusationTitle");
+  const accusationText = document.getElementById("accusationText");
+  
+  document.getElementById("suspectProfiles").style.display = "none";
+  accusationResult.style.display = "block";
+  
+  if (suspectId === correctSuspect) {
+    // Correct accusation
+    accusationTitle.textContent = "Intruder Caught!";
+    accusationText.innerHTML = `
+      <p>Well done, brave defender! Lady Eleanora has confessed to being a spy from the neighboring kingdom.</p>
+      <p>Upon searching her quarters, the guards found secret plans and communications. Your keen eye for detail has protected the kingdom's secrets!</p>
+      <p><strong>Achievement Unlocked: Security Sentinel 🔍</strong></p>
+    `;
+    
+    // Add the achievement
+    addAchievement("Security Sentinel", "🔍");
+    
+    // Set the task as completed
+    isDataBreachCompleted = true;
+    
+    // Show achievement popup
+    showAchievementPopup("Security Sentinel");
+    
+    // Add a final hard task if desired
+    addNewTask("Strengthen Castle Defenses", "startDefensesGame", "hard");
+  } else {
+    // Incorrect accusation
+    let innocentName = "";
+    if (suspectId === 1) innocentName = "Court Wizard Aldric";
+    else if (suspectId === 2) innocentName = "Chef Bartolomew";
+    
+    accusationTitle.textContent = "Wrong Suspect!";
+    accusationText.innerHTML = `
+      <p>${innocentName} is innocent! While you were focusing on the wrong person, Lady Eleanora managed to escape with valuable kingdom secrets.</p>
+      <p>The evidence was there - she was often seen wandering near the war room with flimsy excuses, and her story had inconsistencies that didn't match court records.</p>
+      <p>Don't worry, you'll have another chance to protect the kingdom.</p>
+    `;
+    
+    // Reduce castle health for wrong accusation
+    updateHealthBar(Math.max(50, parseInt(document.getElementById("castleHealthBarText").textContent) - 20));
+  }
+}
+
+// Function to close the data breach task
+function closeDataBreachTask() {
+  document.getElementById("dataBreachOverlay").style.display = "none";
+  document.getElementById("dataBreachStory").style.display = "block";
+  document.getElementById("suspectProfiles").style.display = "none";
+  document.getElementById("accusationResult").style.display = "none";
+}
