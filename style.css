@@ -731,6 +731,31 @@ body {
 .hidden {
     display: none;
   }
+
+  .waveOneEnemy{
+    position: absolute;
+    left: 100vw;
+    top: 450px;
+    height: 250px;
+    width: 250px;
+    z-index: 6;
+  }
+
+  .waveOne{
+    animation: waveOne 2s ease-in forwards;
+  }
+
+  @keyframes waveOne {
+
+    0%{
+        left: 100vw;
+    }
+
+    100%{
+        left: 200px;
+    }
+    
+  }
   #castleHealthBar {
     position: absolute;
     bottom: 20px; /* Adjust this value to position it above the grass */

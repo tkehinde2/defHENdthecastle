@@ -421,10 +421,21 @@ document.head.appendChild(style);
     
     const tower = document.getElementById("tower");
     tower.classList.add("landTower");
+    
   }
+
+function waveOneEnemy(){
+    const enemyOne = document.getElementById("enemyOne");
+
+    setTimeout(() => {
+        enemyOne.classList.add("waveOne");
+      }, 3000);
+}
+  
 
   function hideWaveOneOverlay(){
     waveOneOverlay.remove();
-  
+
+    waveOneEnemy();
   }
 
