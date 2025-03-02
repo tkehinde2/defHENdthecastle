@@ -19,38 +19,73 @@ window.onload = function () {
   // Add intro animation
   intro.classList.add("introDown");
 };
-
-function start() {
-  const castleName = document.getElementById("castleName").value;
-  if (!castleName) {
-    alert("Please enter a castle name!");
-    return;
+// Function to initialize the health bar
+function initializeHealthBar() {
+    const castleHealthBar = document.getElementById("castleHealthBar");
+    castleHealthBar.style.display = "block"; // Show the health bar
+    updateHealthBar(100); // Start with 100% health
   }
-
-  // Hide the intro screen
-  intro.classList.remove("introDown");
-  intro.classList.add("introUp");
-
-  // Start the grass and castle animations
-  grass.classList.add("grassDown");
-  castle.classList.add("landCastle");
-
-  // Show the side menus
-  checklist.classList.add("showMenus");
-  achievements.classList.add("showMenus");
-
-  // Display the castle name at the top middle of the page
-  displayCastleName(castleName);
-
-  // Hide the mountains
-  const mountains = document.getElementById("mountains");
-  mountains.classList.add("hidden");
-
-  // Start cloud animations after the castle lands
-  setTimeout(() => {
-    document.getElementById("clouds").classList.add("animateClouds");
-  }, 2000); // Adjust timing to match the castle landing animation
-}
+  
+  // Function to update the health bar
+  function updateHealthBar(healthPercentage) {
+    const castleHealthBarFill = document.getElementById("castleHealthBarFill");
+    const castleHealthBarText = document.getElementById("castleHealthBarText");
+  
+    // Ensure health stays within 0-100%
+    healthPercentage = Math.max(0, Math.min(100, healthPercentage));
+  
+    // Update the health bar width and text
+    castleHealthBarFill.style.width = `${healthPercentage}%`;
+    castleHealthBarText.textContent = `${healthPercentage}%`;
+  
+    // Change color based on health level
+    if (healthPercentage <= 50) {
+      castleHealthBarFill.style.backgroundColor = "#FF5722"; // Orange for low health
+    } else {
+      castleHealthBarFill.style.backgroundColor = "#4CAF50"; // Green for high health
+    }
+  }
+  
+  // Function to handle losing the password game
+  function losePasswordGame() {
+    updateHealthBar(50); // Reduce health to 50%
+    alert("You lost the password game! Castle health reduced to 50%.");
+  }
+  
+  function start() {
+    const castleName = document.getElementById("castleName").value;
+    if (!castleName) {
+      alert("Please enter a castle name!");
+      return;
+    }
+  
+    // Hide the intro screen
+    intro.classList.remove("introDown");
+    intro.classList.add("introUp");
+  
+    // Start the grass and castle animations
+    grass.classList.add("grassDown");
+    castle.classList.add("landCastle");
+  
+    // Show the side menus
+    checklist.classList.add("showMenus");
+    achievements.classList.add("showMenus");
+  
+    // Display the castle name at the top middle of the page
+    displayCastleName(castleName);
+  
+    // Hide the mountains
+    const mountains = document.getElementById("mountains");
+    mountains.classList.add("hidden");
+  
+    // Initialize the health bar
+    initializeHealthBar();
+  
+    // Start cloud animations after the castle lands
+    setTimeout(() => {
+      document.getElementById("clouds").classList.add("animateClouds");
+    }, 2000); // Adjust timing to match the castle landing animation
+  }
 
 // Function to display the castle name at the top middle of the page
 function displayCastleName(name) {
@@ -147,17 +182,21 @@ function showPasswordGame(checkbox) {
   startTimer();
 }
 
-// Hide the password game overlay
+// Modify the hidePasswordGame function to handle losing the game
 function hidePasswordGame(isTimeEnded) {
-  passwordGameOverlay.style.display = "none";
-  clearInterval(timerInterval);
-  const element = document.getElementById("startPasswordGame");
-  if (isTimeEnded == false) {
-    element.remove();
-    box = document.getElementById("checkboxPasswordGame");
-    box.checked = true;
-  }
-}
+    passwordGameOverlay.style.display = "none";
+    clearInterval(timerInterval);
+  
+    if (isTimeEnded) {
+      losePasswordGame(); // Reduce health if the player loses
+    } else {
+      const element = document.getElementById("startPasswordGame");
+      if (element) {
+        element.remove();
+        const box = document.getElementById("checkboxPasswordGame");
+        box.checked = true;
+      }
+    }}
 
 // Reset hints to their initial state
 function resetHints() {
@@ -274,11 +313,6 @@ function makeDecision(decision) {
     const element = document.getElementById("startPhishingGame");
     element.remove();
     
-    // You could also add code here to update achievements or game progress
-    // For example, show a notification or update an achievement
-    // const achievementsList = document.querySelector('#achievements ul');
-    // const achievementItem = achievementsList.querySelector('li:nth-child(2)');
-    // achievementItem.style.color = '#4caf50'; // Change color to indicate completion
     
   } else {
     // Incorrect answer
@@ -391,4 +425,6 @@ document.head.appendChild(style);
 
   function hideWaveOneOverlay(){
     waveOneOverlay.remove();
+  
   }
+
