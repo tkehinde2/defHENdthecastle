@@ -443,6 +443,8 @@ function waveOneEnemy(){
            
         }, 500);
     }, 4500);
+
+    showWaveOneVictory();
 }
   
   function hideWaveOneOverlay(){
@@ -476,6 +478,14 @@ function waveOneEnemy(){
 
   }
 
+  function showWaveOneVictory(){
+    const waveOneWinnerOverlay = document.getElementById("waveOneWinnerOverlay");
+    waveOneOverlay.style.display = "flex";
+  }
+  function hideWaveOneWinnerOverlay(){
+    const waveOneWinnerOverlay = document.getElementById("waveOneWinnerOverlay");
+    waveOneOverlay.remove();
+  }
 // Flag to track if the achievement has been added
 let isAchievementAdded = false;
 
