@@ -476,3 +476,119 @@ function waveOneEnemy(){
 
   }
 
+// Flag to track if the achievement has been added
+let isAchievementAdded = false;
+
+// Function to check if the enemy touches the archer or defender
+function checkEnemyCollision() {
+  const enemyOne = document.getElementById("enemyOne");
+  const tower = document.getElementById("tower");
+  const castle = document.getElementById("castle");
+
+  const enemyRect = enemyOne.getBoundingClientRect();
+  const towerRect = tower.getBoundingClientRect();
+  const castleRect = castle.getBoundingClientRect();
+
+  // Check collision with tower (archer)
+  if (
+    enemyRect.left < towerRect.right &&
+    enemyRect.right > towerRect.left &&
+    enemyRect.top < towerRect.bottom &&
+    enemyRect.bottom > towerRect.top
+  ) {
+    handleEnemyCollision();
+  }
+
+  // Check collision with castle (defender)
+  if (
+    enemyRect.left < castleRect.right &&
+    enemyRect.right > castleRect.left &&
+    enemyRect.top < castleRect.bottom &&
+    enemyRect.bottom > castleRect.top
+  ) {
+    handleEnemyCollision();
+  }
+}
+
+// Function to handle enemy collision
+function handleEnemyCollision() {
+  // Ensure the achievement is only added once
+  if (isAchievementAdded) return;
+  isAchievementAdded = true;
+
+  // Remove the password game
+  const passwordGameButton = document.getElementById("startPasswordGame");
+  if (passwordGameButton) {
+    passwordGameButton.remove();
+  }
+
+  // Mark the "Secure the Gates" task as completed
+  const secureGatesCheckbox = document.getElementById("checkboxPasswordGame");
+  if (secureGatesCheckbox) {
+    secureGatesCheckbox.checked = true;
+  }
+
+  // Add the "First Line of Defense" achievement
+  addAchievement("First Line of Defense", "🏆");
+
+  // Show the achievement pop-up
+  showAchievementPopup("First Line of Defense");
+
+  // Remove the "Secure the Gates" task from objectives
+  const secureGatesTask = document.querySelector("#checklist li:nth-child(1)");
+  if (secureGatesTask) {
+    secureGatesTask.remove();
+  }
+
+  // Add a new task (example: "Build a Moat")
+  addNewTask("Build a Moat", "startMoatGame");
+}
+
+// Function to add an achievement
+function addAchievement(text, icon) {
+  const achievementsList = document.querySelector("#achievements ul");
+  const achievementItem = document.createElement("li");
+  achievementItem.innerHTML = `
+    <span class="achievement-icon">${icon}</span>
+    <span class="achievement-text">${text}</span>
+  `;
+  achievementsList.appendChild(achievementItem);
+}
+
+// Function to add a new task
+function addNewTask(text, taskId) {
+  const checklist = document.querySelector("#checklist ul");
+  const newTask = document.createElement("li");
+  newTask.innerHTML = `
+    <input type="checkbox" id="checkbox${taskId}" disabled>
+    <span>${text}</span>
+    <button class="startTask" id="${taskId}">Start Task</button>
+  `;
+  checklist.appendChild(newTask);
+}
+
+// Function to show the achievement pop-up
+function showAchievementPopup(achievementName) {
+  const popup = document.createElement("div");
+  popup.className = "achievement-popup";
+  popup.innerHTML = `
+    <span class="achievement-icon">🏆</span>
+    <span class="achievement-text">Achievement Unlocked: ${achievementName}</span>
+  `;
+
+  // Append the popup to the body
+  document.body.appendChild(popup);
+
+  // Add the "show" class to trigger the animation
+  setTimeout(() => {
+    popup.classList.add("show");
+  }, 10);
+
+  // Remove the popup after the animation ends
+  setTimeout(() => {
+    popup.remove();
+  }, 3000); // Adjust timing to match the animation duration
+}
+
+// Call the collision check function periodically
+setInterval(checkEnemyCollision, 100);
