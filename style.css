@@ -305,7 +305,7 @@ body {
   
   @keyframes landTower {
     0% { top: -300px; }
-    100% { top: calc(100vh - 345px); }
+    100% { top: calc(100vh - 280px); }
   }
 
   .landTower {

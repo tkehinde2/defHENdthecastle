@@ -324,6 +324,16 @@ style.textContent = `
 document.head.appendChild(style);
 
   function launchWaveOne(){
+    const waveOneOverlay = document.getElementById("waveOneOverlay");
+
+    setTimeout(() => {
+        waveOneOverlay.style.display = "flex";
+      }, 3000);
+    
     const tower = document.getElementById("tower");
     tower.classList.add("landTower");
+  }
+
+  function hideWaveOneOverlay(){
+    waveOneOverlay.remove();
   }
