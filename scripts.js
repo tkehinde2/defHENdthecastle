@@ -813,6 +813,7 @@ function waveOneEnemy(){
     waveTwoWinnerOverlay.style.display = "flex";
   }
   function hideWaveTwoWinnerOverlay(){
+    revertToOriginalMusic()
     const waveTwoWinnerOverlay = document.getElementById("waveTwoWinnerOverlay");
     waveTwoWinnerOverlay.remove();
   }
@@ -1006,7 +1007,6 @@ function launchWaveTwo() {
 
     waveTwoEnemy();
 
-    revertToOriginalMusic();
 
     // Add an achievement for completing Wave 2
     addAchievement("Wave 2: Defended the Castle", "🛡️");
