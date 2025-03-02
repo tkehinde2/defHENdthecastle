@@ -163,6 +163,7 @@ function updatePasswordHints() {
         setTimeout(() => {
           hidePasswordGame(false);
         }, 1000); // Wait 1 second before closing
+        launchWaveOne();
       }
     });
   }
