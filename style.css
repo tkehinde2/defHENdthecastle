@@ -414,3 +414,9 @@ body {
     right: 20px;
     z-index: 1000;
   }
+
+
+  /* Setting checkbox color after task has been completed */
+  input[type=checkbox]:checked {
+    outline: 2px solid green;
+  }

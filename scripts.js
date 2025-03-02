@@ -90,12 +90,14 @@ const passwordHints = [
   }
   
   // Hide the password game overlay
-  function hidePasswordGame() {
+  function hidePasswordGame(isTimeEnded) {
     passwordGameOverlay.style.display = "none";
     clearInterval(timerInterval);
     const element = document.getElementById("startPasswordGame");
-    if (element) {
+    if (isTimeEnded == false) {
       element.remove();
+      box = document.getElementById("checkboxPasswordGame");
+      box.checked = true;
     }
   }
   
@@ -138,7 +140,7 @@ const passwordHints = [
       if (currentHintIndex >= passwordHints.length) {
         currentTaskCheckbox.checked = true;
         setTimeout(() => {
-          hidePasswordGame();
+          hidePasswordGame(false);
         }, 1000); // Wait 1 second before closing
       }
     });
@@ -154,7 +156,7 @@ const passwordHints = [
       if (timeLimit <= 0) {
         clearInterval(timerInterval);
         alert("Time's up! Try again.");
-        hidePasswordGame();
+        hidePasswordGame(true);
       }
     }, 1000);
   }
@@ -163,7 +165,7 @@ const passwordHints = [
   closeOverlay.addEventListener("click", hidePasswordGame);
   
   // Add event listeners to "Start Task" buttons
-  document.querySelectorAll(".startTask").forEach((button) => {
+  document.querySelectorAll("#startPasswordGame").forEach((button) => {
     button.addEventListener("click", () => {
       const checkbox = button.closest("li").querySelector("input[type='checkbox']");
       showPasswordGame(checkbox);
