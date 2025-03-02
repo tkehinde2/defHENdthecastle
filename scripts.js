@@ -447,7 +447,6 @@ function moveToNextEmail() {
     if (phishingGameState.correctCount >= 2) {
       const checkbox = document.querySelector('#checklist li:nth-child(2) input[type="checkbox"]');
       if (checkbox) checkbox.checked = true;
-      
       // Remove the start button if it exists
       const element = document.getElementById("startPhishingGame");
       if (element) element.remove();
@@ -480,6 +479,7 @@ function moveToNextEmail() {
     document.getElementById('phishingOverlay').style.display = 'flex';
   }
 }
+
 
 // Function to close completion overlay
 function closeCompletionOverlay() {
@@ -552,8 +552,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function waveOneEnemy(){
     const enemyOne = document.getElementById("enemyOne");
-    const enemyTwo = document.getElementById("enemyTwo");
-    const enemyThree = document.getElementById("enemyThree");
 
       enemyOne.classList.add("enemyMove");  
 
@@ -573,7 +571,7 @@ function waveOneEnemy(){
 }
   
   function hideWaveOneOverlay(){
-    waveOneOverlay.remove();
+    waveOneOverlay.style.display = "none";
     let music = document.getElementById("backgroundMusic")
     let source = document.getElementById("musicSource");
     source.src = "attack.mp3";
@@ -582,6 +580,59 @@ function waveOneEnemy(){
     displayWaveName("Wave 1: Secure The Gates")
 
     waveOneEnemy();
+  }
+
+  function waveTwoEnemy(){
+    const enemyTwo = document.getElementById("enemyTwo");
+
+      enemyTwo.classList.add("enemyTwoMove");  
+
+      setTimeout(() => {
+        // Shake the enemy when the player reaches it
+        enemyTwo.classList.add("enemyShake");
+    
+        setTimeout(() => {
+            // Make the enemy fall off the screen
+            enemyTwo.classList.add("enemyFall");
+    
+            // Add another delay before showing the victory screen
+            setTimeout(() => {
+                showWaveTwoVictory();
+            }, 500); // Adjust the delay as needed (e.g., 1000ms = 1 second)
+    
+        }, 500);
+    }, 5000);
+
+}
+  function checkEnemyCollisionWaveTwo() {
+    const enemyTwo = document.getElementById("enemyTwo");
+    const spikeball = document.getElementById("spikeball");
+    const castle = document.getElementById("castle");
+  
+    const enemyRect = enemyTwo.getBoundingClientRect();
+    const towerRect = spikeball.getBoundingClientRect();
+    const castleRect = castle.getBoundingClientRect();
+  
+    // Check collision with tower (archer)
+    if (
+      enemyRect.left < towerRect.right &&
+      enemyRect.right > towerRect.left &&
+      enemyRect.top < towerRect.bottom &&
+      enemyRect.bottom > towerRect.top
+    ) {
+      handleEnemyCollision();
+    }
+  
+  
+    // Check collision with castle (defender)
+    if (
+      enemyRect.left < castleRect.right &&
+      enemyRect.right > castleRect.left &&
+      enemyRect.top < castleRect.bottom &&
+      enemyRect.bottom > castleRect.top
+    ) {
+      handleEnemyCollision();
+    }
   }
 
   function displayWaveName(name) {
@@ -610,6 +661,15 @@ function waveOneEnemy(){
     const waveOneWinnerOverlay = document.getElementById("waveOneWinnerOverlay");
     waveOneWinnerOverlay.remove();
     waveOneWinnerOverlay.remove();
+  }
+
+  function showWaveTwoVictory(){
+    const waveTwoWinnerOverlay = document.getElementById("waveTwoWinnerOverlay");
+    waveTwoWinnerOverlay.style.display = "flex";
+  }
+  function hideWaveTwoWinnerOverlay(){
+    const waveTwoWinnerOverlay = document.getElementById("waveTwoWinnerOverlay");
+    waveTwoWinnerOverlay.remove();
   }
 // Flag to track if the achievement has been added
 let isAchievementAdded = false;
@@ -744,6 +804,7 @@ function showAchievementPopup(achievementName) {
 
 // Call the collision check function periodically
 setInterval(checkEnemyCollision, 100);
+setInterval(checkEnemyCollisionWaveTwo, 50);
 
 
 // Function to revert the music to the original track
@@ -756,19 +817,33 @@ function revertToOriginalMusic() {
   }
   // Add this function to handle Wave 2
 function launchWaveTwo() {
-    const waveTwoOverlay = document.getElementById("waveTwoOverlay");
-  
-    setTimeout(() => {
+  const waveTwoOverlay = document.getElementById("waveTwoOverlay");
+
+
+  setTimeout(() => {
       waveTwoOverlay.style.display = "flex";
     }, 3000);
   
-    // Add any animations or logic for Wave 2 here
-  }
+  const spikeball = document.getElementById("spikeball");
+  spikeball.classList.add("landTower");
+
   
+
+  }
+
   function hideWaveTwoOverlay() {
     const waveTwoOverlay = document.getElementById("waveTwoOverlay");
-    waveTwoOverlay.remove();
+    waveTwoOverlay.style.display = "none";
   
+    let music = document.getElementById("backgroundMusic")
+    let source = document.getElementById("musicSource");
+    source.src = "attack.mp3";
+    music.load();
+    music.play();
+    displayWaveName("Wave 2: Protect The King's Data")
+
+    waveTwoEnemy();
+
     // Add an achievement for completing Wave 2
     addAchievement("Wave 2: Defended the Castle", "🛡️");
   

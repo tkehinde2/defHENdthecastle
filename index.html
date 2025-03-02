@@ -44,6 +44,8 @@
           <img id="castle" src="castle_4.png" alt="Castle Image">
           <img id="tower" src="archer 2d.png" alt="Tower Image">
           <img id="enemyOne" class="waveOneEnemy" src="waveOneEnemy.png">
+          <img id="enemyTwo" class="waveOneEnemy" src="enemytwo.png">
+          <img id="spikeball" src="spikes.png" >
           <div id="grass"></div>
            <!-- Inside the #gameArea div -->
 <div id="castleHealthBar">
@@ -85,7 +87,7 @@
 <div id="waveOneOverlay" class="overlay">
   <div class="overlay-content">
     <h2>Congrats!</h2>
-    <p>With your secure password, a new archer has been added to defend your castle! But can it stand against attackers?</p>
+    <p id="waveText">With your secure password, a new archer has been added to defend your castle! But can it stand against attackers?</p>
     <button id="closeOverlay" onclick="hideWaveOneOverlay()">Close</button>
   </div>
 </div>
@@ -96,6 +98,22 @@
       <br>Achievment Unlocked : The First Line Of Defense🏆
     </p>
     <button id="closeOverlay" onclick="hideWaveOneWinnerOverlay()">Close</button>
+  </div>
+</div>
+<div id="waveTwoOverlay" class="overlay">
+  <div class="overlay-content">
+    <h2>Congrats!</h2>
+    <p id="waveText">With your ability to detect phishing, a spikeball has been added to your defense!</p>
+    <button id="closeOverlay" onclick="hideWaveTwoOverlay()">Close</button>
+  </div>
+</div>
+<div id="waveTwoWinnerOverlay" class="overlay">
+  <div class="overlay-content">
+    <h2>Winner!</h2>
+    <p> Well Done! Those Zombies thought they could impersonate you, but not with Two Factor Authentication!
+      <br>Achievment Unlocked : The First Line Of Defense🏆
+    </p>
+    <button id="closeOverlay" onclick="hideWaveTwoWinnerOverlay()">Close</button>
   </div>
 </div>
 

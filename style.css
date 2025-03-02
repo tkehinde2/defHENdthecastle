@@ -85,6 +85,15 @@ body {
     height: auto;
     z-index: 5;
   }
+
+  #spikeball{
+    position: absolute;
+    top: -300px;
+    left: 375px;
+    width: 150px;
+    height: auto;
+    z-index: 5;
+  }
   
   #grass {
     position: absolute;
@@ -787,11 +796,15 @@ body {
     top: 465px;
     height: 200px;
     width: 150px;
-    z-index: 6;
+    z-index: 11;
   }
 
   .enemyMove{
     animation: move 5s linear forwards;
+  }
+
+  .enemyTwoMove{
+    animation: twoMove 5s linear forwards;
   }
 
   .enemyShake{
@@ -817,6 +830,11 @@ body {
 @keyframes move {
     from { left: 100vw; }
     to { left: 200px; }
+}
+
+@keyframes twoMove {
+  from { left: 100vw; }
+  to { left: 375px; }
 }
   #castleHealthBar {
     position: absolute;
