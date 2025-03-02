@@ -19,7 +19,7 @@ window.onload = function () {
     // Add intro animation
     intro.classList.add('introDown');
   };
-function start() {
+  function start() {
     const castleName = document.getElementById("castleName").value;
     if (!castleName) {
       alert("Please enter a castle name!");
@@ -40,6 +40,15 @@ function start() {
   
     // Display the castle name at the top middle of the page
     displayCastleName(castleName);
+  
+    // Hide the mountains
+    const mountains = document.getElementById("mountains");
+    mountains.classList.add("hidden");
+  
+    // Start cloud animations after the castle lands
+    setTimeout(() => {
+      document.getElementById("clouds").classList.add("animateClouds");
+    }, 2000); // Adjust timing to match the castle landing animation
   }
   
   // Function to display the castle name at the top middle of the page

@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'MedievalSharp', cursive; /* Use a medieval-style font */
-    background-color: #1e1e1e; /* Dark background for contrast */
+    background-color: #FAEBD7;
     color: #f4f4f4; /* Light text for readability */
     overflow: hidden;
   }
@@ -24,8 +24,8 @@ body {
     transform: translate(-50%, -50%);
     width: 300px;
     padding: 20px;
-    background-color: #3a2c2c; /* Dark brown for medieval feel */
-    border: 2px solid #8b7355; /* Gold border */
+    background-color: #7B1018; /* Dark brown for medieval feel */
+    border: 2px solid #7B1018; /* Gold border */
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     z-index: 10;
@@ -34,22 +34,22 @@ body {
   #intro h1 {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #d4af37; /* Gold text */
+    color: #f5f0f0; /* Gold text */
   }
   
   #castleName {
     padding: 10px;
     margin-bottom: 10px;
     width: 80%;
-    border: 1px solid #8b7355;
+    border: 1px solid #7B1018;
     border-radius: 5px;
-    background-color: #2a1e1e;
-    color: #f4f4f4;
+    background-color: #c5bebe;
+    color: #000000;
   }
   
   button {
     padding: 10px 20px;
-    background-color: #8b7355; /* Gold button */
+    background-color: #f4f4f4; /* Gold button */
     border: none;
     border-radius: 5px;
     color: #1e1e1e;
@@ -58,7 +58,7 @@ body {
   }
   
   button:hover {
-    background-color: #d4af37; /* Lighter gold on hover */
+    background-color: #ebce6f; /* Lighter gold on hover */
   }
   
   /* Game Area */
@@ -83,7 +83,7 @@ body {
     left: 0;
     width: 100vw;
     height: 300px;
-    background-color: #2a4d2a; /* Dark green grass */
+    background-color: #5e9b5e; /* Dark green grass */
     z-index: 1;
   }
   
@@ -415,8 +415,173 @@ body {
     z-index: 1000;
   }
 
+  /* Cloud Styles */
+/* Cloud Styles */
+#clouds {
+    position: absolute;
+    top: 0; /* Position at the top of the page */
+    left: 0;
+    width: 100%;
+    height: 30%; /* Limit height to the top portion of the screen */
+    overflow: hidden;
+    z-index: 2; /* Ensure clouds are behind the castle but above the grass */
+  }
+  
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 1000px;
+    opacity: 0.7;
+    animation: moveClouds linear infinite;
+  }
+  
+  /* Cloud Shapes */
+  .cloud::before,
+  .cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 1000px;
+  }
+  
+  .cloud::before {
+    width: 80%;
+    height: 80%;
+    top: -40%;
+    left: 10%;
+  }
+  
+  .cloud::after {
+    width: 60%;
+    height: 60%;
+    top: -30%;
+    right: 10%;
+  }
+  
+  /* Individual Cloud Sizes and Positions */
+  .cloud1 {
+    width: 200px;
+    height: 60px;
+    top: 10%;
+    left: -200px;
+    animation-duration: 20s; /* Faster animation */
+  }
+  
+  .cloud2 {
+    width: 150px;
+    height: 50px;
+    top: 20%;
+    left: -150px;
+    animation-duration: 18s; /* Faster animation */
+  }
+  
+  .cloud3 {
+    width: 180px;
+    height: 55px;
+    top: 15%;
+    left: -180px;
+    animation-duration: 22s; /* Faster animation */
+  }
+  
+  .cloud4 {
+    width: 220px;
+    height: 70px;
+    top: 5%;
+    left: -220px;
+    animation-duration: 25s; /* Faster animation */
+  }
+  
+  .cloud5 {
+    width: 170px;
+    height: 60px;
+    top: 25%;
+    left: -170px;
+    animation-duration: 19s; /* Faster animation */
+  }
+  
+  .cloud6 {
+    width: 190px;
+    height: 65px;
+    top: 12%;
+    left: -190px;
+    animation-duration: 21s; /* Faster animation */
+  }
+  
+  /* Cloud Animation */
+  @keyframes moveClouds {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100vw);
+    }
+  }
+  .animateClouds .cloud {
+    animation-play-state: running;
+  }
+  /* Mountain Styles */
+#mountains {
+    position: absolute;
+    bottom: 0; /* Position at the bottom of the page */
+    left: 0;
+    width: 100%;
+    height: 150px; /* Adjust height as needed */
+    z-index: 3; /* Ensure mountains are above the grass but below the castle */
+    overflow: hidden;
+  }
+  
+  /* Mountain Peaks */
+  #mountains::before,
+  #mountains::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 150px solid #6b5b4d; /* Mountain color */
+  }
+  
+  #mountains::before {
+    left: 0;
+  }
+  
+  #mountains::after {
+    right: 0;
+  }
+  
+  /* Additional Mountain Peaks */
+  .mountain-peak {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid #6b5b4d; /* Mountain color */
+  }
+  
+  .mountain-peak:nth-child(1) {
+    left: 20%;
+  }
+  
+  .mountain-peak:nth-child(2) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .mountain-peak:nth-child(3) {
+    right: 20%;
+  }
+  
+
 
   /* Setting checkbox color after task has been completed */
   input[type=checkbox]:checked {
     outline: 2px solid green;
+  }
+  /* Hide Mountains */
+.hidden {
+    display: none;
   }
