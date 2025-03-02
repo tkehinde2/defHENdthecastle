@@ -1073,8 +1073,8 @@ function launchWaveTwo() {
     waveThreeWinnerOverlay.style.display = "flex";
   }
   function hideWaveThreeWinnerOverlay(){
-
     
+    revertToOriginalMusic();
     const waveThreeWinnerOverlay = document.getElementById("waveThreeWinnerOverlay");
     waveThreeWinnerOverlay.remove();
   }
