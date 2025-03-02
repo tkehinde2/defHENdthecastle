@@ -180,3 +180,8 @@ const passwordHints = [
       showPasswordGame(checkbox);
     });
   });
+
+  function launchWaveOne(){
+    const tower = document.getElementById("tower");
+    tower.classList.add("landTower");
+  }

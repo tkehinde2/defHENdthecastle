@@ -76,6 +76,15 @@ body {
     height: auto;
     z-index: 5;
   }
+
+  #tower{
+    position: absolute;
+    top: -300px;
+    left: 250px;
+    width: 150px;
+    height: auto;
+    z-index: 5;
+  }
   
   #grass {
     position: absolute;
@@ -294,6 +303,15 @@ body {
     100% { top: calc(100vh - 275px); }
   }
   
+  @keyframes landTower {
+    0% { top: -300px; }
+    100% { top: calc(100vh - 345px); }
+  }
+
+  .landTower {
+    animation: landTower 2s ease-out forwards;
+  }
+
   .showMenus {
     animation: showMenus 2s ease-in forwards;
   }
