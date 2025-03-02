@@ -233,7 +233,6 @@ function startTimer() {
 }
 
 // Event listener for the close button
-closeOverlay.addEventListener("click", hideTwoFactorGame);
 closeOverlay.addEventListener("click", hidePasswordGame);
 
 // Add event listeners to "Start Task" buttons
